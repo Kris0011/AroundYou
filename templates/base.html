@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Around You</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.css" rel="stylesheet" />
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'global.css' %}" />
+</head>
+<body class="dark:bg-gray-800 dark:text-white">
+    
+    {% include 'sidebar.html' %}
+
+    <div class="sm:pl-72 pr-20 mt-20">
+        <h1 class="text-center text-3xl font-mono">Welcome to AroundYou</h1>
+    </div>
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"></script>
+
+</body>
+</html>
