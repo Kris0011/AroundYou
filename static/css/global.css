@@ -1,0 +1,17 @@
+@font-face {
+    font-family: 'tannimbus';
+    src: local('tannimbus') , url('../fonts/TAN-NIMBUS.ttf') format('truetype')
+}
+
+@font-face {
+    font-family: 'poppins';
+    src: local('poppins') , url('../fonts/Poppins-Regular.ttf') format('truetype');
+}
+
+.tannimbus {
+    font-family: 'tannimbus';
+}
+
+.poppins {
+    font-family: 'poppins';
+}

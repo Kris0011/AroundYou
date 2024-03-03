@@ -5,21 +5,60 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Around You</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
     <script src="https://cdn.tailwindcss.com"></script>
 
     {% load static %}
-    <link rel="stylesheet" href="{% static 'global.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/global.css' %}" />
+
 </head>
-<body class="dark:bg-gray-800 dark:text-white">
+<body class="dark:bg-gray-800 dark:text-white poppins">
     
     {% include 'sidebar.html' %}
 
-    <div class="sm:pl-72 pr-20 mt-20">
-        <h1 class="text-center text-3xl font-mono">Welcome to AroundYou</h1>
+    <div class="sm:pl-52 px-10 mt-10 flex flex-col justify-center items-center">
+
+      {% block content %}
+
+      {% endblock %}
+
+      
+      {% include 'footer.html' %}
+        
     </div>
 
+    
 
+
+    {% comment %} all javascript links {% endcomment %}
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"></script>
 
+
+
+    <script>
+        var bgColors = [
+           "#387ADF" ,
+            "green" ,
+            "#D04848" ,
+        ]
+
+
+        const toast = ( text , index )=>{
+            Toastify({
+                text: text ,
+                duration: 3000,
+                close: true,
+                gravity: "top",
+                position: "center",
+                backgroundColor: bgColors[index],
+                className: "rounded-lg",
+
+                stopOnFocus: true,
+            }).showToast();
+        }
+      
+        
+      </script>
 </body>
 </html>

@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    {% comment %} <h1 class="text-3xl">AroundYou</h1> {% endcomment %}
+    <div class="flex md:flex-row flex-col justify-center items-center">
+        <div class="flex flex-col justify-center items-center">
+            <p class="  text-4xl poppins text-center w-[500px] leading-snug font-semibold mt-20" >Connecting You with Trusted Service Providers</p>
+            <p class="text-lg poppins text-gray-300 text-center w-[500px] mt-3 font-700">Find the Right Professionals for Every Job, Hassle-Free</p>
+    
+        </div>
+        
+        {% load static %}
+        <img src="{% static 'images/aroundyou.png' %}" class="h-96" alt="aroundyou">
+    </div>
+
+    <div class="flex md:flex-row-reverse flex-col justify-center items-center mt-14">
+        <div class="flex flex-col justify-center items-center">
+            <p class="  text-4xl poppins text-center w-[500px] leading-snug font-semibold" >Your Service, Your Space – Anytime, Anywhere</p>
+            <p class="text-lg poppins text-gray-300 text-center w-[500px] mt-3 font-700">With a commitment to excellence, our professionals bring their skills right to your doorstep. Let's simplify your life – explore our range of services today!</p>
+    
+        </div>
+        
+        {% load static %}
+        <img src="{% static 'images/hero.png' %}" class="h-100" alt="aroundyou">
+    </div>
+
+
+    <button class="bg-blue-500 p-2 rounded-md">Get the Servie now !!!</button>
+
+
+{% endblock %}
