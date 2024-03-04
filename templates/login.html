@@ -1,0 +1,38 @@
+{% extends 'base.html' %} {% block content%}
+
+<div class="p-4 m-10  flex flex-col justify-center items-center">
+  <h1 class="text-xl text-center font-semibold">Login</h1>
+
+  <form class="border p-5 m-4 rounded-md bg-gray-200 text-md " method="POST">
+    {% csrf_token %} {{ login_form.non_field_errors }}
+    {{ login_form.errors }}
+    <div class="mb-5 flex space-x-2">
+      <label
+        for="{{ login_form.username.id_for_label }}"
+        class="block mb-2 text-sm font-medium text-black"
+        >Username:</label
+      >
+      {{ login_form.username}}
+    </div>
+
+    <div class="mb-5 flex space-x-2">
+      <label
+        for="{{ login_form.password.id_for_label }"
+        class="block mb-2 text-sm font-medium text-black"
+        >Password</label
+      >
+      <div></div>
+      {{ login_form.password}}
+    </div>
+
+    <button type="submit" class="bg-blue-700 rounded-md p-1 text-sm">
+      Login
+    </button>
+  </form>
+
+  <p>
+    New User ? <a href="/register" class="text-blue-400">Register now!</a>
+  </p>
+</div>
+
+{% endblock %}

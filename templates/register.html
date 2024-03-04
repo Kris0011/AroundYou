@@ -1,0 +1,64 @@
+{% extends 'base.html' %} {% block content%}
+
+<div class="p-4 m-10 flex flex-col justify-center items-center">
+  <h1 class="text-xl text-center font-semibold">Register</h1>
+
+  <form class="border p-5 m-4 rounded-md bg-gray-100 text-md" method="POST">
+    {% csrf_token %} {{ register_form.non_field_errors }}
+    {{ register_form.errors }}
+    <div class="mb-5 flex space-x-2">
+      <label
+        for="{{ register_form.username.id_for_label }}"
+        class="block mb-2 text-sm font-medium text-black"
+        >Username:</label
+      >
+      {{register_form.username}}
+    </div>
+    <div class="mb-5 flex space-x-2">
+      <label
+        for="{{ register_form.name.id_for_label }}"
+        class="block mb-2 text-sm font-medium text-black"
+        >Name:</label
+      >
+      {{register_form.name}}
+    </div>
+    <div class="mb-5 flex space-x-2">
+      <label
+        for="{{ register_form.email.id_for_label }"
+        class="block mb-2 text-sm font-medium text-black"
+        >Email :</label
+      >
+      {{ register_form.email}}
+    </div>
+
+    <div class="mb-5 flex space-x-2">
+      <label
+        for="{{ register_form.password1.id_for_label }"
+        class="block mb-2 text-sm font-medium text-black"
+        >Password :</label
+      >
+      {{ register_form.password1}}
+    </div>
+    <div class="mb-5 flex space-x-2">
+      <label
+        for="{{ register_form.password2.id_for_label }"
+        class="block mb-2 text-sm font-medium text-black"
+        >Confirm Password :</label
+      >
+      {{ register_form.password2}}
+    </div> 
+
+    {% comment %} {{ register_form.as_p }} {% endcomment %}
+
+    <button type="submit" class="bg-blue-700 rounded-md p-1 text-sm">
+      Register
+    </button>
+  </form>
+
+  <p>
+    Already registered ?
+    <a href="/login" class="text-blue-400">Go to Login</a>
+  </p>
+</div>
+
+{% endblock %}
