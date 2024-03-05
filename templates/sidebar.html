@@ -43,6 +43,8 @@
           {% comment %} {{ isLoggedin }} {% endcomment %}
           
           {% if isLoggedin  %}
+
+         
         
 
           <div>
@@ -54,8 +56,8 @@
             >
               <span class="sr-only">Open user menu</span>
               <img
-                class="w-8 h-8 rounded-full"
-                src="https://flowbite.com/docs/images/people/profile-picture-5.jpg"
+                class="w-14 h-14 rounded-full ring-2 ring-gray-300"
+                src="{{ user.img.url}}"
                 alt="user photo"
               />
             </button>
@@ -114,7 +116,7 @@
 
 <aside
   id="logo-sidebar"
-  class="fixed top-0 left-0 z-40 w-52 h-screen pt-20 transition-transform -translate-x-full bg-white border-r border-gray-200 sm:translate-x-0 dark:bg-gray-800 dark:border-gray-700"
+  class="fixed top-0 left-0 z-40 w-52 h-screen pt-24 transition-transform -translate-x-full bg-white border-r border-gray-200 sm:translate-x-0 dark:bg-gray-800 dark:border-gray-700"
   aria-label="Sidebar"
 >
   <div class="h-full px-3 pb-4 overflow-y-auto bg-white dark:bg-gray-800">

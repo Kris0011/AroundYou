@@ -39,18 +39,20 @@
     {% endfor %}
 {% endif %}
 
-    <div class="sm:pl-52 px-10 mt-10 flex flex-col justify-center items-center">
+    <div class="sm:pl-56  px-4  mt-10 flex flex-col justify-between items-center min-h-screen">
 
-        
-
+       
       {% block content %}
-
-      {% endblock %}
+        {% endblock %}
+      
 
       
       {% include 'footer.html' %}
         
     </div>
+
+
+   
 
     
 
