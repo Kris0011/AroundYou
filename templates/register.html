@@ -3,10 +3,10 @@
 <div class="p-4 m-10 flex flex-col justify-center items-center">
   <h1 class="text-xl text-center font-semibold">Register</h1>
 
-  <form class="border p-5 m-4 rounded-md bg-gray-100 text-md" method="POST">
+  <form class="border p-5 m-4 rounded-md bg-gray-100 text-md text-black" method="POST">
     {% csrf_token %} {{ register_form.non_field_errors }}
     {{ register_form.errors }}
-    <div class="mb-5 flex space-x-2">
+     <div class="mb-5 flex space-x-2">
       <label
         for="{{ register_form.username.id_for_label }}"
         class="block mb-2 text-sm font-medium text-black"
@@ -18,13 +18,21 @@
       <label
         for="{{ register_form.name.id_for_label }}"
         class="block mb-2 text-sm font-medium text-black"
-        >Name:</label
+        >First Name:</label
       >
-      {{register_form.name}}
+      {{register_form.first_name}}
     </div>
     <div class="mb-5 flex space-x-2">
       <label
-        for="{{ register_form.email.id_for_label }"
+        for="{{ register_form.name.id_for_label }}"
+        class="block mb-2 text-sm font-medium text-black"
+        >Last Name:</label
+      >
+      {{register_form.last_name}}
+    </div>
+    <div class="mb-5 flex space-x-2">
+      <label
+        for="{{ register_form.email.id_for_label }}"
         class="block mb-2 text-sm font-medium text-black"
         >Email :</label
       >
@@ -33,7 +41,7 @@
 
     <div class="mb-5 flex space-x-2">
       <label
-        for="{{ register_form.password1.id_for_label }"
+        for="{{ register_form.password1.id_for_label }}"
         class="block mb-2 text-sm font-medium text-black"
         >Password :</label
       >
@@ -46,14 +54,50 @@
         >Confirm Password :</label
       >
       {{ register_form.password2}}
-    </div> 
+    </div>  
 
-    {% comment %} {{ register_form.as_p }} {% endcomment %}
+    <div class="mb-5 flex space-x-2">
+      <label
+        for="{{ register_form.phone.id_for_label }}"
+        class="block mb-2 text-sm font-medium text-black"
+        >Phone :</label
+      >
+      {{ register_form.phone}}
+    </div>
+
+    <div class="mb-5 flex space-x-2">
+      <label for="{{ register_form.role.id_for_label }}" class="block mb-2 text-sm font-medium text-black">
+          Role:
+      </label>
+      <select name="{{ register_form.role.name }}" id="{{ register_form.role.id_for_label }}" class="form-control" onchange="toggleForms()">
+          {% for value, label in register_form.role.field.choices %}
+              <option value="{{ value }}" {% if value == register_form.role.value %}selected{% endif %}>
+                  {{ label }}
+              </option>
+          {% endfor %}
+      </select>
+    </div>
+
+    
+
+  
+   
+
+
+
+  
+    
+
+
+  
+
+  
 
     <button type="submit" class="bg-blue-700 rounded-md p-1 text-sm">
       Register
     </button>
   </form>
+
 
   <p>
     Already registered ?
@@ -61,4 +105,43 @@
   </p>
 </div>
 
+
+
+<script>
+ 
+  
+  function toggleForms() {
+      
+
+      var roleSelect = document.getElementById("{{ register_form.role.id_for_label }}");
+      var customerForm = document.getElementById("customerForm");
+      var serviceProviderForm = document.getElementById("serviceProviderForm");
+    
+     
+      if (roleSelect.value == 'customer') {
+          console.log('customer');
+          customerForm.classList.add('flex');
+          customerForm.classList.remove('hidden');
+          serviceProviderForm.classList.add('hidden');
+          serviceProviderForm.classList.remove('flex');
+        
+        
+          
+          
+      } else if (roleSelect.value == 'service_provider') {
+          serviceProviderForm.classList.add('flex');
+          serviceProviderForm.classList.remove('hidden');
+          customerForm.classList.add('hidden');
+          customerForm.classList.remove('flex');
+    
+      } 
+  }
+
+
+  
+  
+  toggleForms();
+</script>
+
 {% endblock %}
+

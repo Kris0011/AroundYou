@@ -1,28 +1,37 @@
 from django.shortcuts import render , redirect
-from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages
-from django.contrib.auth import authenticate , login
+from django.contrib.auth import authenticate , login ,logout
 
-from authapp.forms import UserLoginForm
+from authapp.forms import CustomerForm, ServiceProviderForm, UserLoginForm , UserCreationForm
 
 # Create your views here.
 
 def home(request):
-    return render(request , 'home.html')
+    if request.user.is_authenticated:
+        return render(request , 'home.html' , context = { 'isLoggedin' : True , 'user' : request.user})
+    return render(request , 'home.html' , context = { 'isLoggedin' : False , 'user' : None})
 
 def register_request(request):
     if request.method == "POST":
         form = UserCreationForm(request.POST)
+        # print(form)
+
         if form.is_valid():
-            form.save()
-            messages.success(request , "Registration successful")
-            return redirect('')
+            # print(form.cleaned_data)
+            user = form.save()
+            login(request , user)
+            
+            messages.success(request , "Registration successful , Now set more details in profile.")
+            
+            return redirect('/set_profile/' , context = { 'user' : user})
         else:
+            # print(form.errors)
             messages.error(request , "Unsuccessful registration. Invalid information")
     
     form = UserCreationForm()
-    print(form)
-    return render(request , 'register.html' , context={'register_form': form})
+    # print(customer_form)
+    # print(serviceprovider_form)
+    return render(request , 'register.html' , context={'register_form': form })
 
 def login_request(request):
     if request.method == "POST":
@@ -34,7 +43,7 @@ def login_request(request):
             if user is not None:
                 login(request , user)
                 messages.info(request , f"You are now logged in as {username}")
-                return redirect('')
+                return redirect('/' ,context = { 'user' : user})
             else:
                 messages.error(request , "Invalid username or password")
         else:
@@ -42,6 +51,57 @@ def login_request(request):
     
     form = UserLoginForm()
     # print(form)
-    return render(request , 'login.html' , context={'login_form': form})
-        
+    return render(request , 'login.html' , context={'login_form': form })
+    
+def logout_request(request):
+    logout(request)
+    messages.info(request , "You have successfully logged out.")
+    return redirect('/')
+
+def set_profile(request):
+    user = request.user
+    if user.is_authenticated:
+        if user.role == 'service_provider':
+            return set_serviceprovider_details(request)
+        elif user.role == 'customer':
+            return set_customer_details(request)
+        else:
+            messages.error(request , "Invalid role")
+            return redirect('/' , context = { 'user' : user})
+    else:
+        messages.error(request , "You are not logged in")
+        return redirect('/login/')
+    
+
+
+def set_customer_details(request):
+    if request.method == "POST":
+        form = CustomerForm(request.POST)
+        if form.is_valid():
+            customer = form.save(commit=False)
+            customer.user = request.user
+            customer.save()
+            messages.success(request , "Customer details saved successfully")
+            return redirect('/' , context = { 'user' : request.user})
+        else:
+            messages.error(request , "Unsuccessful registration. Invalid information")
+    
+    form = CustomerForm()
+    return render(request , 'set_customer_details.html' , context={'customer_form': form  , })
+
+def set_serviceprovider_details(request):
+    if request.method == "POST":
+        form = ServiceProviderForm(request.POST)
+        if form.is_valid():
+            serviceprovider = form.save(commit=False)
+            serviceprovider.user = request.user
+            serviceprovider.save()
+            messages.success(request , "Service provider details saved successfully")
+            return redirect('/' , context = { 'user' : request.user})
+        else:
+            messages.error(request , "Unsuccessful registration. Invalid information")
+    
+    form = ServiceProviderForm()
+    return render(request , 'set_serviceprovider_details.html' , context={'serviceprovider_form': form })
+    
         
