@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+
+
+{% block content %}
+
+<h1>Settings</h1>
+
+<form action="" method="post" class="text-black">
+
+    {% csrf_token %}
+    {{ customer_form.as_p }}
+
+    <button type="submit" class="bg-blue-700 rounded-md p-1 text-sm">
+        Save
+     </button>
+</form>
+    
+{% endblock content %}
