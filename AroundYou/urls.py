@@ -17,8 +17,10 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path , include
 from authapp import urls as auth_urls
+from service import urls as service_url
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include(auth_urls)),
+    path('service/',include(service_url)),
 ]
