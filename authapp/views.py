@@ -3,6 +3,7 @@ from django.contrib import messages
 from django.contrib.auth import authenticate , login ,logout
 
 from authapp.forms import CustomerForm, ServiceProviderForm, UserLoginForm , UserCreationForm
+from authapp.models import Customer, ServiceProvider
 
 # Create your views here.
 
@@ -42,7 +43,8 @@ def login_request(request):
             user = authenticate(username=username , password=password)
             if user is not None:
                 login(request , user)
-                messages.info(request , f"You are now logged in as {username}")
+                print(user.username)
+                messages.success(request , f"You are now logged in as {username}")
                 return redirect('/' ,context = { 'user' : user})
             else:
                 messages.error(request , "Invalid username or password")
@@ -82,12 +84,12 @@ def set_customer_details(request):
             customer.user = request.user
             customer.save()
             messages.success(request , "Customer details saved successfully")
-            return redirect('/' , context = { 'user' : request.user})
+            return redirect('/' , context = { 'user' : request.user })
         else:
             messages.error(request , "Unsuccessful registration. Invalid information")
     
     form = CustomerForm()
-    return render(request , 'set_customer_details.html' , context={'customer_form': form  , })
+    return render(request , 'set_customer_details.html' , context={'customer_form': form  , 'isLoggedin' : True , 'user' : request.user , 'role' : 'customer'})
 
 def set_serviceprovider_details(request):
     if request.method == "POST":
@@ -97,11 +99,30 @@ def set_serviceprovider_details(request):
             serviceprovider.user = request.user
             serviceprovider.save()
             messages.success(request , "Service provider details saved successfully")
-            return redirect('/' , context = { 'user' : request.user})
+            return redirect('/' , context = { 'user' : request.user , 'isLoggedin' : True})
         else:
             messages.error(request , "Unsuccessful registration. Invalid information")
     
     form = ServiceProviderForm()
-    return render(request , 'set_serviceprovider_details.html' , context={'serviceprovider_form': form })
-    
+    return render(request , 'set_serviceprovider_details.html' , context={'serviceprovider_form': form  , 'isLoggedin' : True , 'user' : request.user , 'role' : 'service_provider'})
+
+def profile(request):
+    user  = request.user
+
+    if user.is_authenticated:
+        if user.role == 'service_provider':
+            sp_user = ServiceProvider.objects.get(user = user)
+            services = sp_user.services.split(',')
+            print(services)
+            
+            return render(request , 'serviceprovider_profile.html' , context = { 'user' : user , 'serviceprovider' : sp_user , 'services' : services , 'isLoggedin' : True})
+        elif user.role == 'customer':
+            customer = Customer.objects.get(user = user)
+            return render(request , 'customer_profile.html' , context = { 'user' : user , 'customer' : customer , 'isLoggedin' : True})
+        else:
+            messages.error(request , "Invalid role")
+            return redirect('/' , context = { 'user' : user})
+    else :
+        messages.error(request , "You are not logged in")
+    return redirect('/login/')
         

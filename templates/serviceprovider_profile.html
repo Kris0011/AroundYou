@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class=" border-gray-400 shadow-md shadow-black rounded-2xl bg-gray-900 p-14 m-10 flex flex-col justify-center items-center mt-20">
+
+    
+    <div class="flex justify-center items-center">
+        <img src="{{user.img.url}}" alt="{{user.username}}" class="h-60 w-60 rounded-xl">
+
+
+        <div class="flex m-10 space-x-4 "> 
+            <div class="flex flex-col space-y-3">
+                <h1 class="text-gray-400">Username :</h1>
+                <p class="text-gray-400">Email :</p>
+                <p class="text-gray-400">Full Name :</p>
+                <p class="text-gray-400">About Me:</p>
+                <p class="text-gray-400">Mobile No. :</p>
+                <p class="text-gray-400">Date Joined :</p>
+                {% comment %} <p class="text-gray-400">Address :</p> {% endcomment %}
+                <p class="text-gray-400">Available Location :</p>
+                <p class="text-gray-400">Services :</p>
+
+
+            </div>
+            <div class="flex flex-col space-y-3">
+                <h1 class="text-gray-100">{{user.username}}</h1>
+                <p class="text-gray-100">{{user.email}}</p>
+                <p class="text-gray-100">{{user.first_name}} {{user.last_name}}</p>
+                <p class="text-gray-100">{{serviceprovider.qualification}}</p>
+                <p class="text-gray-100">{{user.phone}}</p>
+                <p class="text-gray-100">{{user.date_joined}}</p>
+                {% comment %} <p class="text-gray-100">{{customer.address}}</p> {% endcomment %}
+                {% comment %} {{services}} {% endcomment %}
+                <p class="text-gray-100">{{serviceprovider.services_location}}</p>
+                
+                {% for service in services   %}
+                    <ul>
+                        <li>{{service}}</li>
+                    </ul>
+                {% endfor %}
+                    
+
+                
+                
+                    
+            </div>
+        </div>
+    
+        
+    </div>
+
+    
+    <div class="flex justify-center items-center space-x-4">
+        <a href="/" class="bg-gray-400 text-gray-900 p-2 rounded-xl">Update Profile</a>
+        <a href="/logout" class="bg-red-400 text-gray-900 p-2 rounded-xl">Logout</a>
+
+    </div>
+    
+        
+
+    
+</div>
+
+{% endblock content %}

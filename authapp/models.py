@@ -5,7 +5,7 @@ from django.contrib.auth.models import AbstractUser
 class CustomUser(AbstractUser):
     phone = models.CharField(max_length=10)
     role  = models.CharField(max_length=20 ,choices=[('customer', 'Customer'), ('service_provider', 'Service Provider')] , default='customer')
-    img = models.FileField(upload_to='profile_pics', default='default.jpg')
+    img = models.FileField(upload_to='profile_pics', default='/v1/profile_pics/default.jpg')
     
 class Customer(models.Model):
     user = models.OneToOneField(CustomUser , on_delete=models.CASCADE , primary_key=True)
