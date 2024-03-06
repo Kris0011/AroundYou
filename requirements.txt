@@ -4,6 +4,8 @@ psycopg==3.1.18
 psycopg2-binary==2.9.9
 python-dotenv==1.0.1
 sqlparse==0.4.4
+typing_extensions==4.10.0
 cloudinary==1.39.0
 django-cloudinary-storage==0.3.0
+
 
