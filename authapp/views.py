@@ -113,7 +113,7 @@ def profile(request):
         if user.role == 'service_provider':
             sp_user = ServiceProvider.objects.get(user = user)
             services = sp_user.services.split(',')
-            print(services)
+            # print(services)
             
             return render(request , 'serviceprovider_profile.html' , context = { 'user' : user , 'serviceprovider' : sp_user , 'services' : services , 'isLoggedin' : True})
         elif user.role == 'customer':

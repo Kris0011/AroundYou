@@ -1,15 +1,16 @@
-{% extends 'base.html' %}
+{% extends 'base.html' %} {% block content %}
 
-{% block content %}
+<div
+    class="glassy-effect m-10 mt-20 flex flex-col items-center justify-center rounded-2xl p-14 shadow-lg shadow-gray-900"
+>
+    <div class="flex items-center justify-center">
+        <img
+            src="{{user.img.url}}"
+            alt="{{user.username}}"
+            class="h-60 w-60 rounded-xl"
+        />
 
-<div class=" border-gray-400 shadow-md shadow-black rounded-2xl bg-gray-900 p-14 m-10 flex flex-col justify-center items-center mt-20">
-
-    
-    <div class="flex justify-center items-center">
-        <img src="{{user.img.url}}" alt="{{user.username}}" class="h-60 w-60 rounded-xl">
-
-
-        <div class="flex m-10 space-x-4 "> 
+        <div class="m-10 flex space-x-4">
             <div class="flex flex-col space-y-3">
                 <h1 class="text-gray-400">Username :</h1>
                 <p class="text-gray-400">Email :</p>
@@ -21,26 +22,24 @@
             <div class="flex flex-col space-y-3">
                 <h1 class="text-gray-100">{{user.username}}</h1>
                 <p class="text-gray-100">{{user.email}}</p>
-                <p class="text-gray-100">{{user.first_name}} {{user.last_name}}</p>
+                <p class="text-gray-100">
+                    {{user.first_name}} {{user.last_name}}
+                </p>
                 <p class="text-gray-100">{{user.phone}}</p>
                 <p class="text-gray-100">{{user.date_joined}}</p>
                 <p class="text-gray-100">{{customer.address}}</p>
             </div>
         </div>
-    
-        
     </div>
 
-    
-    <div class="flex justify-center items-center space-x-4">
-        <a href="/" class="bg-gray-400 text-gray-900 p-2 rounded-xl">Update Profile</a>
-        <a href="/logout" class="bg-red-400 text-gray-900 p-2 rounded-xl">Logout</a>
-
+    <div class="flex items-center justify-center space-x-4">
+        <a href="/" class="rounded-xl bg-gray-400 p-2 text-gray-900"
+            >Update Profile</a
+        >
+        <a href="/logout" class="rounded-xl bg-red-400 p-2 text-gray-900"
+            >Logout</a
+        >
     </div>
-    
-        
-
-    
 </div>
 
 {% endblock content %}

@@ -1,11 +1,25 @@
+{% extends "base.html" %} {% block content %}
+<div class="mt-20 flex flex-col items-center justify-center p-4 text-center">
+    <h1 class="text-3xl mb-10">Top Service Provides</h1>
+    <div>
+        {% for service_provider in service_providers %}
+        <div class="flex flex-col items-center justify-center p-4 space-x-2 glassy-effect">
+            <img src="{{ service_provider.user.img.url }}" alt="" class="w-40 h-40 rounded-full mb-4">
+            <h3 class="text-xl">{{ service_provider.user.first_name }} {{ service_provider.user.last_name }}</h2>
+            {% comment %} <p class="text-sm text-gray-400">{{ service_provider.user.phone }}</p>
+            <p class="text-sm text-gray-400">{{ service_provider.user.email }}</p> {% endcomment %}
+            {% comment %} {{ service_provider.services.split(',') }} {% endcomment %}
+           
+            {% comment %} {% with services=service_provider.services.split(',') %}
+            {% for service in services %}
+                <p class="text-sm">{{ service }}</p>
+                {% endfor %}
+                {% endwith %} {% endcomment %}
+            
+            <a href="" class="text-blue-500">View Service</a>
+        </div>
+        {% endfor %}
+    </div>
 
-{% extends "base.html" %}
-
-{% block content %}
-<div class="flex flex-col justify-center items-center mt-20 p-4 text-center">
-    <h1 class="text-3xl">Top Service Provides</h1>
-    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Perferendis quae reiciendis totam velit distinctio rem praesentium placeat exercitationem, non est? Nisi alias veritatis rerum quasi? Eaque adipisci iure saepe fugit!</p>
+    {% endblock content %}
 </div>
-
-
-{% endblock content %}
