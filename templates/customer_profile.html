@@ -40,6 +40,40 @@
             >Logout</a
         >
     </div>
+
+    <div class="flex flex-col items-center justify-center space-x-4 mt-10">
+        <h1 class="text-2xl mb-4">Services Pending / Taken</h1>
+
+        <div>
+            {% for service_request in service_requests   %}
+            <div class="shadow-sm shadow-black p-4 bg-gray-300 text-black rounded-md ">  
+                <h1 class="font-semibold">Service Provider Info</h1>
+                <div class="flex justif-center items-center space-x-3 m-2">
+                    <img src="{{service_request.service_provider.user.img.url}}" alt="" class="h-14 w-14 rounded-full">
+                    <div>
+                        <p>Name: {{service_request.service_provider.user.first_name}} {{service_request.service_provider.last_name}} </p>
+                        <p>Phone: {{service_request.service_provider.user.phone}} </p>
+                        <p>Email: {{service_request.service_provider.user.email}} </p>
+                    </div>
+                    
+                </div>  
+
+                <hr>
+
+                <h1 class="font-semibold mt-2">Service Info</h1>
+                <div>
+                    <p>Description: {{service_request.description}}</p>
+                    <p>Status : {{service_request.request_status}}</p>
+                </div>
+               
+
+            </div>    
+
+        {% endfor %}
+        </div>
+       
+            
+    </div>
 </div>
 
 {% endblock content %}

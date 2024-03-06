@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block content %}
+   <div class="flex mt-20 justify-center items-center flex-col">
+
+        <h1>Service Request</h1>
+
+        <form action="" method="POST" class="text-black">
+
+            {% csrf_token %}
+
+            {{ s_request_form.as_p}}
+
+            <button type="Submit">Submit</button>
+
+        </form>
+        
+        
+
+   </div>
+{% endblock %}
+```

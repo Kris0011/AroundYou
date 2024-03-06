@@ -4,6 +4,7 @@ from django.contrib.auth import authenticate , login ,logout
 
 from authapp.forms import CustomerForm, ServiceProviderForm, UserLoginForm , UserCreationForm
 from authapp.models import Customer, ServiceProvider
+from service.models import ServiceRequest
 
 # Create your views here.
 
@@ -118,7 +119,8 @@ def profile(request):
             return render(request , 'serviceprovider_profile.html' , context = { 'user' : user , 'serviceprovider' : sp_user , 'services' : services , 'isLoggedin' : True})
         elif user.role == 'customer':
             customer = Customer.objects.get(user = user)
-            return render(request , 'customer_profile.html' , context = { 'user' : user , 'customer' : customer , 'isLoggedin' : True})
+            services_requests  = ServiceRequest.objects.filter(customer = customer)
+            return render(request , 'customer_profile.html' , context = { 'user' : user , 'customer' : customer , 'isLoggedin' : True , 'service_requests' : services_requests})
         else:
             messages.error(request , "Invalid role")
             return redirect('/' , context = { 'user' : user})

@@ -1,15 +1,15 @@
 {% extends 'base.html' %} {% block content %} {% comment %}
 <h1 class="text-3xl">AroundYou</h1>
 {% endcomment %}
-<div class="flex flex-col items-center justify-center md:flex-row">
+<div class="flex flex-col items-center justify-center lg:flex-row">
     <div class="flex flex-col items-center justify-center">
         <p
-            class="poppins mt-20 w-[500px] text-center text-4xl font-semibold leading-snug"
+            class="poppins mt-20 md:w-[500px] w-[300px] text-center text-2xl lg:text-4xl md:text-3xl  font-semibold leading-snug"
         >
             Connecting You with Trusted Service Providers
         </p>
         <p
-            class="poppins font-700 mt-3 w-[500px] text-center text-lg text-gray-300"
+            class="poppins font-700 mt-3 md:w-[500px] w-[300px] text-center text-sm lg:text-lg md:text-md text-gray-300"
         >
             Find the Right Professionals for Every Job, Hassle-Free
         </p>
@@ -18,22 +18,22 @@
     {% load static %}
     <img
         src="{% static 'images/aroundyou.png' %}"
-        class="h-96"
+        class="lg:h-96 h-64"
         alt="aroundyou"
     />
 </div>
 
 <div
-    class="mt-14 flex flex-col items-center justify-center md:flex-row-reverse"
+    class="mt-14 flex flex-col items-center justify-center lg:flex-row-reverse"
 >
     <div class="flex flex-col items-center justify-center">
         <p
-            class="poppins w-[500px] text-center text-4xl font-semibold leading-snug"
+            class="poppins md:w-[500px] w-[300px] text-center text-2xl lg:text-4xl md:text-3xl font-semibold leading-snug"
         >
             Your Service, Your Space – Anytime, Anywhere
         </p>
         <p
-            class="poppins font-700 mt-3 w-[500px] text-center text-lg text-gray-300"
+            class="poppins font-700 mt-3 md:w-[500px] w-[300px] text-center  text-sm lg:text-lg md:text-md text-gray-300"
         >
             With a commitment to excellence, our professionals bring their
             skills right to your doorstep. Let's simplify your life – explore
@@ -42,7 +42,7 @@
     </div>
 
     {% load static %}
-    <img src="{% static 'images/hero.png' %}" class="h-100" alt="aroundyou" />
+    <img src="{% static 'images/hero.png' %}" class="lg:h-96 h-64" alt="aroundyou" />
 </div>
 
 <button class="rounded-md bg-blue-500 p-2">Get the Servie now !!!</button>

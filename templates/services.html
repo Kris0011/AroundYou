@@ -1,10 +1,10 @@
 {% extends "base.html" %} {% block content %}
 <div class="mt-20 flex flex-col items-center justify-center p-4 text-center">
     <h1 class="text-3xl mb-10">Top Service Provides</h1>
-    <div>
+    <div class="grid md:grid-cols-3 grid-cols-1 gap-4 ">
         {% for service_provider in service_providers %}
-        <div class="flex flex-col items-center justify-center p-4 space-x-2 glassy-effect">
-            <img src="{{ service_provider.user.img.url }}" alt="" class="w-40 h-40 rounded-full mb-4">
+        <div class="flex flex-col items-center justify-center px-10 py-4  glassy-effect shadow-md shadow-gray-900">
+            <img src="{{ service_provider.user.img.url }}" alt="" class="w-40 h-40 rounded-xl mb-4">
             <h3 class="text-xl">{{ service_provider.user.first_name }} {{ service_provider.user.last_name }}</h2>
             {% comment %} <p class="text-sm text-gray-400">{{ service_provider.user.phone }}</p>
             <p class="text-sm text-gray-400">{{ service_provider.user.email }}</p> {% endcomment %}
@@ -15,8 +15,11 @@
                 <p class="text-sm">{{ service }}</p>
                 {% endfor %}
                 {% endwith %} {% endcomment %}
+            <p class="text-sm">{{ service_provider.services }}</p>
             
-            <a href="" class="text-blue-500">View Service</a>
+            <button class="py-1 px-2 bg-blue-600 rounded-md mt-4">View Service</button>
+           
+  
         </div>
         {% endfor %}
     </div>
