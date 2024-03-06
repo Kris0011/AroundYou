@@ -1,35 +1,54 @@
 {% extends 'base.html' %} {% block content%}
 
 <div class="p-4 m-10  flex flex-col justify-center items-center">
-  <h1 class="text-xl text-center font-semibold">Login</h1>
+  <h1 class="text-4xl text-center font-semibold mt-10 mb-4">Login</h1>
 
-  <form class="border p-5 m-4 rounded-md bg-gray-200 text-md text-black" method="POST">
+  <form class="border md:p-10 p-4 m-4 rounded-md flex md:flex-row flex-col justify-between items-center bg-gray-100 text-md w-full" method="POST">
     {% csrf_token %} {{ login_form.non_field_errors }}
     {{ login_form.errors }}
-    {% comment %} <div class="mb-5 flex space-x-2">
-      <label
-        for="{{ login_form.username.id_for_label }}"
-        class="block mb-2 text-sm font-medium text-black"
-        >Username:</label
-      >
-      {{ login_form.username}}
+    <div>
+      {% load static %}
+      <img
+        src="{% static 'images/boy.gif' %}"
+        class="lg:h-48  h-32  mx-auto"
+        alt="aroundyou"
+      />
     </div>
+    <div class="flex flex-col justify-center items-center">
+      <div class="mb-5 flex space-x-2">
+     
 
-    <div class="mb-5 flex space-x-2">
-      <label
-        for="{{ login_form.password.id_for_label }}"
-        class="block mb-2 text-sm font-medium text-black"
-        >Password</label
-      >
-      <div></div>
-      {{ login_form.password}}
-    </div> {% endcomment %}
+        <label class="form-control w-full " for="{{ login_form.username.id_for_label }">
+          <div class="label ">
+            <span class="label-text text-gray-900">What is your username?</span>
+          </div>
+          {{ login_form.username}}
+         
+        </label>
+       
+        
+      </div>
+  
+      <div class="mb-5 flex space-x-2">
+       
+  
+        <label class="form-control w-full " for="{{ login_form.password.id_for_label }}">
+          <div class="label ">
+            <span class="label-text text-gray-900">What is your Password?</span>
+          </div>
+          {{ login_form.password}}
+         
+        </label>
+      </div>
+      <button type="submit" class="bg-blue-700 mx-auto rounded-md p-2 text-sm">
+        Login
+      </button>
+    </div>
+   
 
-    {{ login_form.as_p }}
-
-    <button type="submit" class="bg-blue-700 rounded-md p-1 text-sm">
-      Login
-    </button>
+    {% comment %} {{ login_form.as_p }} {% endcomment %}
+ 
+   
   </form>
 
   <p>

@@ -3,16 +3,25 @@ from .models import CustomUser , ServiceProvider , Customer
 from django.contrib.auth.forms import UserCreationForm
 
 class UserCreationForm(UserCreationForm):
+    role_choices = [('customer', 'Customer'), ('service_provider', 'Service Provider')]
+    username = forms.CharField(widget=forms.TextInput(attrs={'class': 'input input-bordered w-full max-w-xs', 'placeholder': 'Enter your username'}))
+    email = forms.EmailField(widget=forms.EmailInput(attrs={'class': 'input input-bordered w-full max-w-xs', 'placeholder': 'Enter your email'}))
+    first_name = forms.CharField(widget=forms.TextInput(attrs={'class': 'input input-bordered w-full max-w-xs', 'placeholder': 'Enter your first name'}))
+    last_name = forms.CharField(widget=forms.TextInput(attrs={'class': 'input input-bordered w-full max-w-xs', 'placeholder': 'Enter your last name'}))
+    phone = forms.CharField(widget=forms.TextInput(attrs={'class': 'input input-bordered w-full max-w-xs', 'placeholder': 'Enter your phone number'}))
+    password1 = forms.CharField(widget=forms.PasswordInput(attrs={'class': 'input input-bordered w-full max-w-xs', 'placeholder': 'Enter your password'}))
+    password2 = forms.CharField(widget=forms.PasswordInput(attrs={'class': 'input input-bordered w-full max-w-xs', 'placeholder': 'Confirm your password'}))
+    role = forms.ChoiceField(choices=role_choices, widget=forms.Select(attrs={'class': 'input input-bordered w-full max-w-xs'}))
+
     class Meta:
         model = CustomUser
         fields = ['username', 'email', 'first_name', 'last_name', 'phone', 'password1', 'password2', 'role']
-        role = forms.ChoiceField(choices=[('customer', 'Customer'), ('service_provider', 'Service Provider')])
         
         
         
 class UserLoginForm(forms.Form):
-    username = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control' , 'placeholder': 'Enter your username'}))
-    password = forms.CharField(widget=forms.PasswordInput(attrs={'class': 'form-control' , 'placeholder': 'Enter your password'}))
+    username = forms.CharField(widget=forms.TextInput(attrs={'class': 'input input-bordered w-full max-w-xs' , 'placeholder': 'Enter your username'}))
+    password = forms.CharField(widget=forms.PasswordInput(attrs={'class': 'input input-bordered w-full max-w-xs' , 'placeholder': 'Enter your password'}))
     
 class ServiceProviderForm(forms.ModelForm):
     class Meta:

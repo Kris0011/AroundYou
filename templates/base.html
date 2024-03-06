@@ -12,6 +12,7 @@
 
     <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.css" rel="stylesheet" />
     <link href="https://cdn.jsdelivr.net/npm/daisyui@4.7.2/dist/full.min.css" rel="stylesheet" type="text/css" />
+
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
     <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css"
@@ -45,11 +46,14 @@
     {% endfor %}
     {% endif %}
 
-    <div class="sm:pl-56  px-4  mt-10 flex flex-col justify-between items-center min-h-screen">
+    <div class="sm:pl-56  px-4  mt-10 flex flex-col justify-between min-h-screen">
 
+        <div class="flex flex-col justify-center items-center">
+            {% block content %}
+            {% endblock %}
+        </div>
 
-        {% block content %}
-        {% endblock %}
+        
 
 
 
