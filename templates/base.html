@@ -14,15 +14,14 @@
     <link href="https://cdn.jsdelivr.net/npm/daisyui@4.7.2/dist/full.min.css" rel="stylesheet" type="text/css" />
 
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css"
-        media="all">
-    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    <!-- CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/simple-notify@1.0.4/dist/simple-notify.css" />
 
+    <!-- JS -->
+    <script src="https://cdn.jsdelivr.net/npm/simple-notify@1.0.4/dist/simple-notify.min.js"></script>
 
     {% load static %}
     <link rel="stylesheet" href="{% static 'css/global.css' %}" />
-
 </head>
 
 <body class="dark:bg-gray-800 bg-stone-100 dark:text-white poppins min-h-screen">
@@ -30,20 +29,20 @@
     {% include 'sidebar.html' %}
 
     {% if messages %}
-    {% for message in messages %}
-    {% if message.tags == 'success'%}
-    <script type=text/javascript>
-
-                toastr.{{ message.tags }}('{{ message }}')
+        {% for message in messages %}
+            <script>
+                new Notify({
+                    text:  "{{ message }}",
+                    status: "{{ message.tags }}",
+                    effect: 'slide',
+                    speed: 300,
+                    showIcon: true,
+                    showCloseButton: false,
+                    autoclose: true,
+                    position: 'x-center',
+                })
             </script>
-    {% elif message.tags == 'info' %}
-    <script type=text/javascript>toastr.{{ message.tags }}('{{ message }}')</script>
-    {% elif message.tags == 'warning' %}
-    <script type=text/javascript>toastr.{{ message.tags }}('{{ message }}')</script>
-    {% elif message.tags == 'error' %}
-    <script type=text/javascript>toastr.{{ message.tags }}('{{ message }}')</script>
-    {% endif %}
-    {% endfor %}
+        {% endfor %}
     {% endif %}
 
     <div class="sm:pl-56  px-4  mt-10 flex flex-col justify-between min-h-screen">
@@ -68,35 +67,11 @@
 
 
     {% comment %} all javascript links {% endcomment %}
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"></script>
 
 
 
-    <script>
-        var bgColors = [
-            "#387ADF",
-            "green",
-            "#D04848",
-        ]
-
-
-        const toast = (text, index) => {
-            Toastify({
-                text: text,
-                duratio n: 3000,
-                close: true,
-                gravity: "top",
-                position: "center",
-                backgroundColor: bgColors[index],
-                className: "rounded-lg",
-
-                stopOnFocus: true,
-            }).showToast();
-        }
-
-
-    </script>
+   
 </body>
 
 </html>
