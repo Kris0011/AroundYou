@@ -29,6 +29,8 @@ class ServiceProviderForm(forms.ModelForm):
         fields = ['services', 'services_location', 'qualification']
         
 class CustomerForm(forms.ModelForm):
+    address = forms.CharField(widget=forms.TextInput(attrs={'class': 'textarea textarea-bordered h-24 w-full', 'placeholder': 'Enter your address'}))
+    
     class Meta:
         model = Customer
         fields = ['address']

@@ -9,7 +9,7 @@ class CustomUser(AbstractUser):
     
 class Customer(models.Model):
     user = models.OneToOneField(CustomUser , on_delete=models.CASCADE , primary_key=True)
-    address = models.CharField(max_length=100)
+    address = models.TextField(max_length=200)
     
 class ServiceProvider(models.Model):
     user = models.OneToOneField(CustomUser , on_delete=models.CASCADE , primary_key=True)
