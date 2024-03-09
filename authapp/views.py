@@ -127,4 +127,3 @@ def profile(request):
     else :
         messages.error(request , "You are not logged in")
     return redirect('/login/')
-        

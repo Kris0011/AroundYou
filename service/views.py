@@ -3,6 +3,7 @@ from authapp.models import ServiceProvider , CustomUser , Customer
 from django.contrib import messages
 
 from service.forms import ServiceRequestForm
+from service.models import ServiceRequest
 
 
 # Create your views here.
@@ -40,4 +41,51 @@ def request_service(request , sp_id):
     else:
         messages.error(request , "You are not logged in")
         return redirect('/login/')
+
+
+def complete_service(request , req_id):
+    user = request.user
+    if user.is_authenticated:
+        service_request = ServiceRequest.objects.get(req_id = req_id)
+        service_request.request_status = 'completed'
+        service_request.save()
+        messages.success(request , "Service request completed successfully")
+        return redirect('/profile/' , context = { 'user' : user})
+    else:
+        messages.error(request , "You are not logged in")
+        return redirect('/login/')
         
+        
+def accept_service(request , req_id):
+    user = request.user
+    if user.is_authenticated:
+        service_request = ServiceRequest.objects.get(req_id = req_id)
+        service_request.request_status = 'accepted'
+        service_request.save()
+        messages.success(request , "Service request accepted successfully")
+        return redirect('myservices' , context = { 'user' : user})
+    else:
+        messages.error(request , "You are not logged in")
+        return redirect('/login/')
+    
+def reject_service(request , req_id):
+    user = request.user
+    if user.is_authenticated:
+        service_request = ServiceRequest.objects.get(req_id = req_id)
+        service_request.request_status = 'rejected'
+        service_request.save()
+        messages.success(request , "Service request rejected successfully")
+        return redirect('/profile/' , context = { 'user' : user})
+    else:
+        messages.error(request , "You are not logged in")
+        return redirect('/login/')
+    
+
+def my_services(request):
+    user  = request.user
+    if user.is_authenticated and user.role == 'service_provider':
+        service_provider = ServiceProvider.objects.get(user = user)   
+        service_requests = ServiceRequest.objects.filter( service_provider = service_provider)
+        return render(request , 'myservices.html' , {'service_requests':service_requests , 'isLoggedin':request.user.is_authenticated , 'user':request.user})
+    messages.error(request , "You are not logged in")
+    return redirect('/login/')
