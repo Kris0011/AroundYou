@@ -12,12 +12,12 @@ def index(request):
     if request.method == 'POST':
         filter_form = FilterServices(request.POST)
         if filter_form.is_valid:
+            print(filter_form)
             service_type = filter_form.cleaned_data['service_type']
             service_location = filter_form.cleaned_data['service_location']
             if service_type == 'all' and service_location == 'all':
                 service_providers = ServiceProvider.objects.all()
-                filter_form = FilterServices()
-                
+                filter_form = FilterServices()  
             elif service_type == 'all':
                 service_providers_temp = ServiceProvider.objects.all()
                 service_providers = []
@@ -25,8 +25,7 @@ def index(request):
                     if sp.services_location.upper().find(service_location.upper()) != -1:
                         service_providers.append(sp)
                 filter_form = FilterServices()
-                filter_form.fields['service_location'].initial = service_location
-                
+                filter_form.fields['service_location'].initial = service_location      
             elif service_location == 'all':
                 service_providers_temp = ServiceProvider.objects.all()
                 service_providers = []
@@ -34,8 +33,7 @@ def index(request):
                     if sp.services.upper().find(service_type.upper()) != -1:
                         service_providers.append(sp)
                 filter_form = FilterServices()
-                filter_form.fields['service_type'].initial = service_type
-                
+                filter_form.fields['service_type'].initial = service_type            
             else:
                 service_providers_temp = ServiceProvider.objects.all()
                 service_providers = []
@@ -46,7 +44,6 @@ def index(request):
                 filter_form.fields['service_location'].initial = service_location
                 filter_form.fields['service_type'].initial = service_type
 
-            
             return render(request , 'services.html' , {'service_providers':service_providers , 'isLoggedin':request.user.is_authenticated , 'user':request.user , 'filter_form':filter_form})  
         
     filter_form = FilterServices()    
@@ -80,8 +77,8 @@ def request_service(request , sp_id):
         return render(request , 'service_request.html' , {'s_request_form':s_request_form , 'isLoggedin':request.user.is_authenticated , 'user':request.user , 'sp_user' : sp_user})
     
     else:
-        messages.error(request , "You are not logged in")
-        return redirect('/login/')
+        messages.error(request , "Please login to request service")
+        return redirect('/service/allservices/')
 
 
 def complete_service(request , req_id):

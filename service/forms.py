@@ -7,7 +7,8 @@ class ServiceRequestForm(forms.ModelForm):
         model = ServiceRequest
         fields = ['description']
         widgets = {
-            'description': forms.Textarea(attrs={'class': 'form-control' , 'placeholder': 'Enter your request description'})
+            'description': forms.Textarea(attrs={'class': 'textarea textarea-bordered h-32' , 'placeholder': 'Enter your request description'})
+           
         }
         labels = {
             'description': 'Description'

@@ -10,7 +10,7 @@
             <div>
                 {% for service_request in service_requests   %}
                 {% if service_request.request_status == 'pending' %}
-                <div class="shadow-sm shadow-black p-4 bg-gray-300 text-black rounded-md ">  
+                <div class="shadow-sm shadow-black p-4 bg-gray-300 text-black rounded-md my-10">  
                     <h1 class="font-semibold">Customer Info</h1>
                     <div class="flex justif-center items-center space-x-3 m-2">
                         <img src="{{service_request.customer.user.img.url}}" alt="" class="h-32 w-32 rounded-full">
@@ -58,7 +58,7 @@
                 {% for service_request in service_requests   %}
                 
                 {% if service_request.request_status == 'accepted' %}
-                <div class="shadow-sm shadow-black p-4 bg-gray-300 text-black rounded-md ">  
+                <div class="shadow-sm shadow-black p-4 bg-gray-300 text-black rounded-md my-10">  
                     <h1 class="font-semibold">Customer Info</h1>
                     <div class="flex justif-center items-center space-x-3 m-2">
                         <img src="{{service_request.customer.user.img.url}}" alt="" class="h-32 w-32 rounded-full">
@@ -98,7 +98,7 @@
                 {% for service_request in service_requests   %}
                 
                 {% if service_request.request_status == 'completed' %}
-                <div class="shadow-sm shadow-black p-4 bg-gray-300 text-black rounded-md ">  
+                <div class="shadow-sm shadow-black p-4 bg-gray-300 text-black rounded-md my-10">  
                     <h1 class="font-semibold">Customer Info</h1>
                     <div class="flex justif-center items-center space-x-3 m-2">
                         <img src="{{service_request.customer.user.img.url}}" alt="" class="h-32 w-32 rounded-full">

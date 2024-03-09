@@ -7,5 +7,3 @@ sqlparse==0.4.4
 typing_extensions==4.10.0
 cloudinary==1.39.0
 django-cloudinary-storage==0.3.0
-
-
