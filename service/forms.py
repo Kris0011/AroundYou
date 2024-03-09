@@ -12,4 +12,13 @@ class ServiceRequestForm(forms.ModelForm):
         labels = {
             'description': 'Description'
         }
+        
+class FilterServices(forms.ModelForm):
+    service_type =  forms.ChoiceField(choices=[('all', 'All'), ('plumber', 'Plumber'), ('electrician', 'Electrician'), ('carpenter', 'Carpenter'), ('tailor', 'Tailor'), ('cleaner', 'Cleaner')], widget=forms.Select(attrs={'class': 'select select-info w-full max-w-xs'}))
+    
+    service_location = forms.ChoiceField(choices=[('all', 'All'), ('ahmedabad', 'Ahmedabad'), ('vadodara', 'Vadodara'), ('nadiad', 'Nadiad') , ('rajkot' , 'Rajkot') , ('surat','Surat') ], widget=forms.Select(attrs={'class': 'select select-info w-full max-w-xs'}) )   
+    
+    class Meta:
+        model = ServiceProvider
+        fields = ['services', 'services_location']
     

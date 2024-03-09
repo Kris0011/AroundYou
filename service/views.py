@@ -2,19 +2,60 @@ from django.shortcuts import redirect, render
 from authapp.models import ServiceProvider , CustomUser , Customer
 from django.contrib import messages
 
-from service.forms import ServiceRequestForm
+from service.forms import FilterServices, ServiceRequestForm
 from service.models import ServiceRequest
 
 
 # Create your views here.
 
 def index(request):
+    if request.method == 'POST':
+        filter_form = FilterServices(request.POST)
+        if filter_form.is_valid:
+            service_type = filter_form.cleaned_data['service_type']
+            service_location = filter_form.cleaned_data['service_location']
+            if service_type == 'all' and service_location == 'all':
+                service_providers = ServiceProvider.objects.all()
+                filter_form = FilterServices()
+                
+            elif service_type == 'all':
+                service_providers_temp = ServiceProvider.objects.all()
+                service_providers = []
+                for sp in service_providers_temp:
+                    if sp.services_location.upper().find(service_location.upper()) != -1:
+                        service_providers.append(sp)
+                filter_form = FilterServices()
+                filter_form.fields['service_location'].initial = service_location
+                
+            elif service_location == 'all':
+                service_providers_temp = ServiceProvider.objects.all()
+                service_providers = []
+                for sp in service_providers_temp:
+                    if sp.services.upper().find(service_type.upper()) != -1:
+                        service_providers.append(sp)
+                filter_form = FilterServices()
+                filter_form.fields['service_type'].initial = service_type
+                
+            else:
+                service_providers_temp = ServiceProvider.objects.all()
+                service_providers = []
+                for sp in service_providers_temp:
+                    if sp.services.upper().find(service_type.upper()) != -1 and sp.services_location.upper().find(service_location.upper()) != -1:
+                        service_providers.append(sp)
+                filter_form = FilterServices()
+                filter_form.fields['service_location'].initial = service_location
+                filter_form.fields['service_type'].initial = service_type
+
+            
+            return render(request , 'services.html' , {'service_providers':service_providers , 'isLoggedin':request.user.is_authenticated , 'user':request.user , 'filter_form':filter_form})  
+        
+    filter_form = FilterServices()    
     service_providers = ServiceProvider.objects.all()
-    return render(request , 'services.html' , {'service_providers':service_providers , 'isLoggedin':request.user.is_authenticated , 'user':request.user})
+    return render(request , 'services.html' , {'service_providers':service_providers , 'isLoggedin':request.user.is_authenticated , 'user':request.user , 'filter_form':filter_form})
 
 
 def request_service(request , sp_id):
-    print("inside the request function")
+    # print("inside the request function")
     if request.user.is_authenticated:
         custom_user  = CustomUser.objects.get(id = sp_id)
         if custom_user.role != 'service_provider':
