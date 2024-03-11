@@ -12,7 +12,7 @@ def index(request):
     if request.method == 'POST':
         filter_form = FilterServices(request.POST)
         if filter_form.is_valid:
-            print(filter_form)
+           # print(filter_form)
             service_type = filter_form.cleaned_data['service_type']
             service_location = filter_form.cleaned_data['service_location']
             if service_type == 'all' and service_location == 'all':
