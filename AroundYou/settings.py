@@ -44,7 +44,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'authapp',
     'service',
-    'django_extensions',
+    # 'django_extensions',
 ]
 
 MIDDLEWARE = [

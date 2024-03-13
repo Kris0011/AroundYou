@@ -24,6 +24,9 @@ class UserLoginForm(forms.Form):
     password = forms.CharField(widget=forms.PasswordInput(attrs={'class': 'input input-bordered w-full max-w-xs' , 'placeholder': 'Enter your password'}))
     
 class ServiceProviderForm(forms.ModelForm):
+    services = forms.CharField(widget=forms.TextInput(attrs={'class': 'input input-bordered w-full max-w-xs' , 'placeholder': 'Enter your Services'}))
+    services_location = forms.CharField(widget=forms.TextInput(attrs={'class': 'input input-bordered w-full max-w-xs' , 'placeholder': 'Enter your service locations'}))
+    qualification = forms.CharField(widget=forms.TextInput(attrs={'class': 'textarea textarea-bordered h-24 w-full', 'placeholder': 'Enter your qualification'}))
     class Meta:
         model = ServiceProvider
         fields = ['services', 'services_location', 'qualification']
@@ -34,3 +37,30 @@ class CustomerForm(forms.ModelForm):
     class Meta:
         model = Customer
         fields = ['address']
+
+class edit_Common(forms.ModelForm):
+    email = forms.EmailField(widget=forms.EmailInput(attrs={'class': 'input input-bordered w-full max-w-xs', 'placeholder': 'Enter your email'}))
+    first_name = forms.CharField(widget=forms.TextInput(attrs={'class': 'input input-bordered w-full max-w-xs', 'placeholder': 'Enter your first name'}))
+    last_name = forms.CharField(widget=forms.TextInput(attrs={'class': 'input input-bordered w-full max-w-xs', 'placeholder': 'Enter your last name'}))
+    phone = forms.CharField(widget=forms.TextInput(attrs={'class': 'input input-bordered w-full max-w-xs', 'placeholder': 'Enter your phone number'}))
+
+    class Meta:
+        model=CustomUser
+        fields=["email","first_name","last_name","phone"]
+
+class edit_CustomerForm(forms.ModelForm):
+   address = forms.CharField(widget=forms.TextInput(attrs={'class': 'textarea textarea-bordered h-24 w-full', 'placeholder': 'Enter your address'}))
+
+   class Meta:
+       model=Customer
+       fields=["address"]
+
+class edit_ServiceProviderForm(forms.ModelForm):
+    services = forms.CharField(widget=forms.TextInput(attrs={'class': 'input input-bordered w-full max-w-xs' , 'placeholder': 'Enter your Services'}))
+    services_location = forms.CharField(widget=forms.TextInput(attrs={'class': 'input input-bordered w-full max-w-xs' , 'placeholder': 'Enter your service locations'}))
+    qualification = forms.CharField(widget=forms.TextInput(attrs={'class': 'textarea textarea-bordered h-24 w-full', 'placeholder': 'Enter your qualification'}))
+
+    class Meta:
+        model=ServiceProvider
+        fields=["services","services_location","qualification"]
+
