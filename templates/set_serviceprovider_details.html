@@ -6,10 +6,49 @@
 
 <h1>Settings</h1>
 
-<form action="" method="post" class="text-black">
+<form action="" method="post" class="border md:p-10 p-4 m-4 rounded-md flex flex-col justify-between items-center bg-gray-100 text-md w-full">
 
     {% csrf_token %}
-    {{ serviceprovider_form.as_p }}
+    {% comment %}{{ serviceprovider_form.as_p }} {% endcomment %}
+
+    <div class="mb-5 flex space-x-2">
+        <label class="form-control w-full " for="{{  serviceprovider_form.services.id_for_label }}">
+            <div class="label">
+                <span class="label-text text-gray-900">Enter Your Services:</span>
+            </div>
+            {{ serviceprovider_form.services }}
+        </label>
+        <!-- <label class="form-control w-full " for="{{  serviceprovider_form.services_location.id_for_label }}">
+            <div class="label">
+                <span class="label-text text-gray-900">Enter Your Service location:</span>
+            </div>
+            {{ serviceprovider_form.services_location }}
+        </label>
+        <label class="form-control w-full " for="{{  serviceprovider_form.qualification.id_for_label }}">
+            <div class="label">
+                <span class="label-text text-gray-900">Enter Your qualification:</span>
+            </div>
+            {{ serviceprovider_form.qualification }}
+        </label> -->
+    </div>
+
+    <div class="mb-5 flex space-x-2">
+        <label class="form-control w-full " for="{{  serviceprovider_form.services_location.id_for_label }}">
+            <div class="label">
+                <span class="label-text text-gray-900">Enter Your Service location:</span>
+            </div>
+            {{ serviceprovider_form.services_location }}
+        </label>
+    </div>
+
+    <div class="mb-5 flex space-x-2">
+        <label class="form-control w-full " for="{{  serviceprovider_form.qualification.id_for_label }}">
+            <div class="label">
+                <span class="label-text text-gray-900">Enter Your qualification:</span>
+            </div>
+            {{ serviceprovider_form.qualification }}
+        </label>
+    </div>
 
     <button type="submit" class="bg-blue-700 rounded-md p-1 text-sm">
         Save
