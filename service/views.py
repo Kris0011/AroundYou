@@ -4,6 +4,7 @@ from django.contrib import messages
 
 from service.forms import FilterServices, ServiceRequestForm
 from service.models import ServiceRequest
+import razorpay
 
 
 # Create your views here.
@@ -17,10 +18,12 @@ def index(request):
             service_location = filter_form.cleaned_data['service_location']
             if service_type == 'all' and service_location == 'all':
                 service_providers = ServiceProvider.objects.all()
+                
                 filter_form = FilterServices()  
             elif service_type == 'all':
                 service_providers_temp = ServiceProvider.objects.all()
                 service_providers = []
+   
                 for sp in service_providers_temp:
                     if sp.services_location.upper().find(service_location.upper()) != -1:
                         service_providers.append(sp)
@@ -29,6 +32,7 @@ def index(request):
             elif service_location == 'all':
                 service_providers_temp = ServiceProvider.objects.all()
                 service_providers = []
+                 
                 for sp in service_providers_temp:
                     if sp.services.upper().find(service_type.upper()) != -1:
                         service_providers.append(sp)
@@ -37,6 +41,7 @@ def index(request):
             else:
                 service_providers_temp = ServiceProvider.objects.all()
                 service_providers = []
+
                 for sp in service_providers_temp:
                     if sp.services.upper().find(service_type.upper()) != -1 and sp.services_location.upper().find(service_location.upper()) != -1:
                         service_providers.append(sp)
@@ -87,11 +92,23 @@ def complete_service(request , req_id):
         service_request = ServiceRequest.objects.get(req_id = req_id)
         service_request.request_status = 'completed'
         service_request.save()
-        messages.success(request , "Service request completed successfully")
+        # payment(request , service_request)
+        # return redirect('/payment/' , { 'service_request' : service_request })
+        # messages.success(request , "Service request completed successfully")
         return redirect('/profile/' , context = { 'user' : user})
     else:
         messages.error(request , "You are not logged in")
         return redirect('/login/')
+    
+# def payment(request , service_request):
+    
+    
+    
+    
+    
+
+    
+    
         
         
 def accept_service(request , req_id):

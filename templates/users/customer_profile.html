@@ -55,6 +55,8 @@
                         <p>Name: {{service_request.service_provider.user.first_name}} {{service_request.service_provider.user.last_name}} </p>
                         <p>Phone: {{service_request.service_provider.user.phone}} </p>
                         <p>Email: {{service_request.service_provider.user.email}} </p>
+
+                        {% comment %} <p> {{service_request.service_provider.avg_cost}} </p> {% endcomment %}
                     </div>
                     
                 </div>  
@@ -62,13 +64,26 @@
                 <hr>
 
                 <h1 class="font-semibold mt-2">Service Info</h1>
-                <div class="flex flex-col justify-center space-y-1 items-center">
+                <div class="flex flex-col justify-center space-y-2 items-center">
                     <p>Description: {{service_request.description}}</p>
                     {% comment %} <p>Status : {{service_request.request_status}}</p> {% endcomment %}
 
-                    <a href="/service/complete_service/{{ service_request.req_id}}" class="p-1  m-1 underline text-blue-700">
+                    {% comment %} <a href="/service/complete_service/{{ service_request.req_id}}" class="p-1  m-1 underline text-blue-700">
                         Click here to complete service
-                    </a>
+                    </a> {% endcomment %}
+
+                    <form class="bg-blue-400 p-2 rounded-md" action="success" method="POST">
+                        
+                
+                        <!-- RAZORPAY INTEGRATION HERE -->
+
+                        
+                        <script src="https://checkout.razorpay.com/v1/checkout.js" data-key="{{RAZORPAY_KEY}}"
+                            data-amount="{{service_request.service_provider.avg_cost}}" data-currency="INR" data-order_id="{{payment.id}}" data-buttontext="Complete Payment"
+                            data-name="{{service_request.service_provider.user.first_name}}" data-description="Complete the Service"
+                            data-image="{{service_request.service_provider.user.img.url}}" data-prefill.name="{{service_request.customer.user.first_name}}" data-prefill.email="{{service_request.customer.user.email}}"
+                            data-theme.color="#0096FF"></script>
+                    </form>
                     
                     
                 </div>
