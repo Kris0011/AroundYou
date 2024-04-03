@@ -2,7 +2,7 @@ from django.shortcuts import render , redirect
 from django.contrib import messages
 from django.contrib.auth import authenticate , login ,logout
 
-from authapp.forms import CustomerForm, ServiceProviderForm, UserLoginForm , UserCreationForm
+from authapp.forms import CustomerForm, ServiceProviderForm, UserLoginForm , UserCreationForm, edit_Common, edit_CustomerForm, edit_ServiceProviderForm
 from authapp.models import Customer, ServiceProvider
 from service.models import ServiceRequest
 
@@ -127,3 +127,33 @@ def profile(request):
     else :
         messages.error(request , "You are not logged in")
     return redirect('/login/')
+
+def edit_profile(request):
+    user=request.user
+    if request.method=="POST":
+        if user.role == 'service_provider':
+            sp_user = ServiceProvider.objects.get(user = user)
+            form = edit_Common(request.POST)
+            form1=edit_ServiceProviderForm(request.POST)
+            if form.is_valid() and form1.is_vaild():
+                form.save()
+                form1.save()
+                messages.success(request , "Service provider details updated successfully")
+                return redirect('/profile/' , context = { 'user' : user , 'serviceprovider':sp_user,'isLoggedin':True})
+            else:
+                messages.error(request , "Unsuccessful registration. Invalid information")
+        elif user.role == 'customer':
+            customer = Customer.objects.get(user = user)
+            form = edit_Common(request.POST)
+            form1=edit_CustomerForm(request.POST)
+            if form.is_valid() and form1.is_valid():
+                form.save()
+                form1.save()
+                messages.success(request , "Customer details updated successfully")
+                return redirect('/profile/' , context = { 'user' : user , 'serviceprovider':sp_user,'isLoggedin':True})
+            else:
+                messages.error(request , "Unsuccessful registration. Invalid information")
+        else:
+            messages.error(request , "Invalid role")
+            return redirect('/' , context = { 'user' : user, 'serviceprovider':sp_user,'isLoggedin':True})
+

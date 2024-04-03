@@ -9,7 +9,6 @@ urlpatterns = [
     path('set_customer_details/' , views.set_customer_details , name='set_customer_details'),
     path('set_profile/' , views.set_profile , name='set_profile'),
     path('profile/' , views.profile , name='profile'),
-   
-    
+    path('profile/edit_profile/' , views.edit_profile , name='edit_profile'),
 ]
 
