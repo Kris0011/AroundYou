@@ -15,7 +15,7 @@ class ServiceRequestForm(forms.ModelForm):
         }
         
 class FilterServices(forms.ModelForm):
-    service_type =  forms.ChoiceField(choices=[('all', 'All'), ('plumber', 'Plumber'), ('electrician', 'Electrician'), ('carpenter', 'Carpenter'), ('tailor', 'Tailor'), ('cleaner', 'Cleaner')], widget=forms.Select(attrs={'class': 'select select-info w-full max-w-xs'}))
+    service_type =  forms.ChoiceField(choices=[('all', 'All'), ('plumber', 'Plumber'), ('electrician', 'Electrician'), ('carpenter', 'Carpenter'), ('tailor', 'Tailor'), ('cleaner', 'Cleaner') , ('haircut' , 'Haircut')], widget=forms.Select(attrs={'class': 'select select-info w-full max-w-xs'}))
     
     service_location = forms.ChoiceField(choices=[('all', 'All'), ('ahmedabad', 'Ahmedabad'), ('vadodara', 'Vadodara'), ('nadiad', 'Nadiad') , ('rajkot' , 'Rajkot') , ('surat','Surat') ], widget=forms.Select(attrs={'class': 'select select-info w-full max-w-xs'}) )   
 

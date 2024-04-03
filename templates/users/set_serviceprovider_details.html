@@ -4,14 +4,14 @@
 
 {% block content %}
 
-<h1>Settings</h1>
+<h1 class="mt-20 text-2xl">Complete the details</h1>
 
-<form action="" method="post" class="border md:p-10 p-4 m-4 rounded-md flex flex-col justify-between items-center bg-gray-100 text-md w-full">
+<form action="" method="post" class="border md:p-10 p-4 m-4 rounded-md flex flex-col justify-center items-center bg-gray-100 text-md w-[600px]">
 
     {% csrf_token %}
     {% comment %}{{ serviceprovider_form.as_p }} {% endcomment %}
 
-    <div class="mb-5 flex space-x-2">
+    <div class="mb-5 flex space-x-2 w-full">
         <label class="form-control w-full " for="{{  serviceprovider_form.services.id_for_label }}">
             <div class="label">
                 <span class="label-text text-gray-900">Enter Your Services:</span>
@@ -32,7 +32,7 @@
         </label> -->
     </div>
 
-    <div class="mb-5 flex space-x-2">
+    <div class="mb-5 flex space-x-2  w-full">
         <label class="form-control w-full " for="{{  serviceprovider_form.services_location.id_for_label }}">
             <div class="label">
                 <span class="label-text text-gray-900">Enter Your Service location:</span>
@@ -41,12 +41,21 @@
         </label>
     </div>
 
-    <div class="mb-5 flex space-x-2">
+    <div class="mb-5 flex space-x-2  w-full">
         <label class="form-control w-full " for="{{  serviceprovider_form.qualification.id_for_label }}">
             <div class="label">
                 <span class="label-text text-gray-900">Enter Your qualification:</span>
             </div>
             {{ serviceprovider_form.qualification }}
+        </label>
+    </div>
+
+    <div class="mb-5 flex space-x-2  w-full">
+        <label class="form-control w-full " for="{{  serviceprovider_form.avg_cost.id_for_label }}">
+            <div class="label">
+                <span class="label-text text-gray-900">Enter Your Average Cost:</span>
+            </div>
+            {{ serviceprovider_form.avg_cost }}
         </label>
     </div>
 
