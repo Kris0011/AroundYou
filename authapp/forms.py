@@ -11,8 +11,9 @@ class UserCreationForm(UserCreationForm):
     phone = forms.CharField(widget=forms.TextInput(attrs={'class': 'input input-bordered w-full max-w-xs', 'placeholder': 'Enter your phone number'}))
     password1 = forms.CharField(widget=forms.PasswordInput(attrs={'class': 'input input-bordered w-full max-w-xs', 'placeholder': 'Enter your password'}))
     password2 = forms.CharField(widget=forms.PasswordInput(attrs={'class': 'input input-bordered w-full max-w-xs', 'placeholder': 'Confirm your password'}))
-    role = forms.ChoiceField(choices=role_choices, widget=forms.Select(attrs={'class': 'input input-bordered w-full max-w-xs'}))
-    img = forms.ImageField(widget=forms.FileInput(attrs={'class': 'file-input file-input-bordered max-w-xs', 'placeholder': 'Choose your profile picture'}))
+    role = forms.ChoiceField(choices=role_choices, widget=forms.Select(attrs={'class': 'input input-bordered w-full max-w-xs'}))    
+    # img = forms.ImageField(widget=forms.FileInput(attrs={'class': 'file-input file-input-bordered max-w-xs', 'placeholder': 'Choose your profile picture' , 'accept': '*' , 'required': False}))
+    
 
     class Meta:
         model = CustomUser
@@ -28,9 +29,10 @@ class ServiceProviderForm(forms.ModelForm):
     services = forms.CharField(widget=forms.TextInput(attrs={'class': 'input input-bordered w-full max-w-xs' , 'placeholder': 'Enter your Services'}))
     services_location = forms.CharField(widget=forms.TextInput(attrs={'class': 'input input-bordered w-full max-w-xs' , 'placeholder': 'Enter your service locations'}))
     qualification = forms.CharField(widget=forms.TextInput(attrs={'class': 'textarea textarea-bordered h-24 w-full', 'placeholder': 'Enter your qualification'}))
+    avg_cost = forms.IntegerField(widget=forms.NumberInput(attrs={'class': 'input input-bordered w-full max-w-xs', 'placeholder': 'Enter your average cost'}))
     class Meta:
         model = ServiceProvider
-        fields = ['services', 'services_location', 'qualification']
+        fields = ['services', 'services_location', 'qualification', 'avg_cost']
         
 class CustomerForm(forms.ModelForm):
     address = forms.CharField(widget=forms.TextInput(attrs={'class': 'textarea textarea-bordered h-24 w-full', 'placeholder': 'Enter your address'}))

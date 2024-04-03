@@ -18,4 +18,5 @@ class ServiceProvider(models.Model):
     services = models.CharField(max_length=100)
     services_location = models.CharField(max_length=100)
     qualification = models.TextField()
+    avg_cost = models.IntegerField(null=True)
     

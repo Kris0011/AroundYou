@@ -16,10 +16,10 @@ def home(request):
 def register_request(request):
     if request.method == "POST":
         form = UserCreationForm(request.POST)
-        # print(form)
+        print(form)
 
         if form.is_valid():
-            # print(form.cleaned_data)
+            print(form.cleaned_data)
             user = form.save()
             login(request , user)
             
@@ -65,7 +65,7 @@ def set_profile(request):
     user = request.user
     if user.is_authenticated:
         if user.role == 'service_provider':
-            return users/set_serviceprovider_details(request)
+            return set_serviceprovider_details(request)
         elif user.role == 'customer':
             return set_customer_details(request)
         else:
@@ -116,7 +116,7 @@ def profile(request):
             services = sp_user.services.split(',')
             # print(services)
             
-            return render(request , 'serviceprovider_profile.html' , context = { 'user' : user , 'serviceprovider' : sp_user , 'services' : services , 'isLoggedin' : True})
+            return render(request , 'users/serviceprovider_profile.html' , context = { 'user' : user , 'serviceprovider' : sp_user , 'services' : services , 'isLoggedin' : True})
         elif user.role == 'customer':
             customer = Customer.objects.get(user = user)
             services_requests  = ServiceRequest.objects.filter(customer = customer)

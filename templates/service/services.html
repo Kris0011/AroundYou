@@ -55,12 +55,16 @@
                 {% endwith %} {% endcomment %}
             <p class="text-sm">{{ service_provider.services }}</p>
             
+            <p class="text-sm">Avg. Cost : {{ service_provider.avg_cost }}</p>
+            
             <a class="py-1 px-2 bg-blue-600 rounded-md mt-4" href="/service/request/{{service_provider.user.id}}">View Service</a>
            
   
         </div>
         {% endfor %}
     </div>
+
+
 
     {% endblock content %}
 </div>
