@@ -1,0 +1,66 @@
+{% extends "base.html" %} {% block content %}
+<div class="mt-20 flex flex-col items-center justify-center p-4 text-center">
+    <h1 class="text-4xl mb-10">Our Service Provides</h1>
+
+
+    <form class="flex justify-center items-center space-x-2 w-[600px] mb-10" method="POST">
+        
+        {% csrf_token %}
+        <label class="form-control w-full max-w-xs">
+            <div class="label">
+                <span class="label-text">Select Service </span>
+            </div>
+            <select class="select select-bordered w-full max-w-xs " name="{{ filter_form.service_type.name }}" id="{{ filter_form.service_type.id_for_label }}">
+                {% for value, label in filter_form.service_type.field.choices %}
+                    <option value="{{ value }}" {% if value == filter_form.service_type.value %}selected{% endif %}>
+                        {{ label }}
+                    </option>
+                {% endfor %}
+            </select>
+         </label>
+
+        <label class="form-control w-full max-w-xs">
+            <div class="label">
+                <span class="label-text">Select Location</span>
+            </div>
+            <select class="select select-bordered w-full max-w-xs  " name="{{ filter_form.service_location.name }}" id="{{ filter_form.service_location.id_for_label }}">
+                {% for value, label in filter_form.service_location.field.choices %}
+                    <option value="{{ value }}" {% if value == filter_form.service_location.value %}selected{% endif %}>
+                        {{ label }}
+                    </option>
+                {% endfor %}
+            </select>
+        </label>
+
+        <button class="bg-blue-600 p-2 rounded-md border-white text-white mt-8">Filter</button>
+
+
+    </form>
+
+
+
+    <div class="grid md:grid-cols-3 grid-cols-1 gap-10 ">
+        {% for service_provider in service_providers %}
+        <div class="flex flex-col items-center justify-center px-10 py-4  glassy-effect shadow-md shadow-gray-900">
+            <img src="{{ service_provider.user.img.url }}" alt="" class="h-40 rounded-xl mb-4">
+            <h3 class="text-xl">{{ service_provider.user.first_name }} {{ service_provider.user.last_name }}</h2>
+            {% comment %} <p class="text-sm text-gray-400">{{ service_provider.user.phone }}</p>
+            <p class="text-sm text-gray-400">{{ service_provider.user.email }}</p> {% endcomment %}
+            {% comment %} {{ service_provider.services.split(',') }} {% endcomment %}
+           
+            {% comment %} {% with services=service_provider.services.split(',') %}
+            {% for service in services %}
+                <p class="text-sm">{{ service }}</p>
+                {% endfor %}
+                {% endwith %} {% endcomment %}
+            <p class="text-sm">{{ service_provider.services }}</p>
+            
+            <a class="py-1 px-2 bg-blue-600 rounded-md mt-4" href="/service/request/{{service_provider.user.id}}">View Service</a>
+           
+  
+        </div>
+        {% endfor %}
+    </div>
+
+    {% endblock content %}
+</div>

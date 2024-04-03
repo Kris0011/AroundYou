@@ -1,3 +1,4 @@
+
 @font-face {
     font-family: "tannimbus";
     src:
@@ -35,4 +36,9 @@
 
 .box {
     border: 2px solid red;
+}
+
+footer{
+    z-index: 1000;
+    border-top: 1px solid #000;
 }

@@ -1,0 +1,147 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="flex flex-col justify-center items-center mt-20">
+        <h1 class="text-4xl mb-10">My Services</h1>
+
+        <div role="tablist" class="tabs tabs-bordered">
+            <input type="radio" name="my_tabs_1" role="tab" class="tab" aria-label="Services Pending" checked/>
+            <div role="tabpanel" class="tab-content" >
+
+                <div class="flex flex-col items-center justify-center space-x-4 mt-10">
+                    <h1 class="text-2xl mb-4">Services Pending </h1>
+            
+                    <div>
+                        {% for service_request in service_requests   %}
+                        {% if service_request.request_status == 'pending' %}
+                        <div class="shadow-sm shadow-black p-4 bg-gray-300 text-black rounded-md my-10">  
+                            <h1 class="font-semibold">Customer Info</h1>
+                            <div class="flex justif-center items-center space-x-3 m-2">
+                                <img src="{{service_request.customer.user.img.url}}" alt="" class="h-32 w-32 rounded-full">
+                                <div>
+                                    <p>Name: {{service_request.customer.user.first_name}} {{service_request.customer.user.last_name}} </p>
+                                    <p>Phone: {{service_request.customer.user.phone}} </p>
+                                    <p>Email: {{service_request.customer.user.email}} </p>
+                                </div>
+                                
+                            </div>  
+            
+                            <hr>
+            
+                            <h1 class="font-semibold mt-2">Service Info</h1>
+                            <div class="flex flex-col justify-center space-y-1 items-center">
+                                <p>Description: {{service_request.description}}</p>
+                                {% comment %} <p>Status : {{service_request.request_status}}</p> {% endcomment %}
+            
+                                <a href="/service/accept_service/{{ service_request.req_id}}" class="p-1  m-1 underline text-blue-700">
+                                    Click here to Accept service
+                                </a>
+                                <a href="/service/reject_service/{{ service_request.req_id}}" class="p-1  m-1 underline text-red-700">
+                                    Click here to Reject service
+                                </a>
+                                
+                                
+                            </div>
+                           
+            
+                        </div>    
+                        {% endif %} 
+        
+                      
+            
+                    {% endfor %}
+                    </div>
+                   
+                        
+                </div>
+                
+            </div>
+          
+            <input type="radio" name="my_tabs_1" role="tab" class="tab"  aria-label="Ongoing Services"  />
+            <div role="tabpanel" class="tab-content" >
+            <div class="flex flex-col items-center justify-center space-x-4 mt-10">
+                <h1 class="text-2xl mb-4">Ongoing Services </h1>
+        
+                <div>
+                    {% for service_request in service_requests   %}
+                    
+                    {% if service_request.request_status == 'accepted' %}
+                    <div class="shadow-sm shadow-black p-4 bg-gray-300 text-black rounded-md my-10">  
+                        <h1 class="font-semibold">Customer Info</h1>
+                        <div class="flex justif-center items-center space-x-3 m-2">
+                            <img src="{{service_request.customer.user.img.url}}" alt="" class="h-32 w-32 rounded-full">
+                            <div>
+                                <p>Name: {{service_request.customer.user.first_name}} {{service_request.customer.user.last_name}} </p>
+                                <p>Phone: {{service_request.customer.user.phone}} </p>
+                                <p>Email: {{service_request.customer.user.email}} </p>
+                            </div>
+                            
+                        </div>  
+        
+                        <hr>
+        
+                        <h1 class="font-semibold mt-2">Service Info</h1>
+                        <div class="flex flex-col justify-center space-y-1 items-center">
+                            <p>Description: {{service_request.description}}</p>
+                        </div>
+                       
+        
+                    </div>    
+                    {% endif %}
+                        
+                    
+        
+                {% endfor %}
+                </div>
+               
+                    
+            </div>
+        </div>
+            
+          
+            <input type="radio" name="my_tabs_1" role="tab"  class="tab" aria-label="Services Completed" />
+            <div role="tabpanel" class="tab-content" >
+            <div class="flex flex-col items-center justify-center space-x-4 mt-10">
+                <h1 class="text-2xl mb-4">Services Completed</h1>
+        
+                <div>
+                    {% for service_request in service_requests   %}
+                    
+                    {% if service_request.request_status == 'completed' %}
+                    <div class="shadow-sm shadow-black p-4 bg-gray-300 text-black rounded-md my-10">  
+                        <h1 class="font-semibold">Customer Info</h1>
+                        <div class="flex justif-center items-center space-x-3 m-2">
+                            <img src="{{service_request.customer.user.img.url}}" alt="" class="h-32 w-32 rounded-full">
+                            <div>
+                                <p>Name: {{service_request.customer.user.first_name}} {{service_request.customer.user.last_name}} </p>
+                                <p>Phone: {{service_request.customer.user.phone}} </p>
+                                <p>Email: {{service_request.customer.user.email}} </p>
+                            </div>
+                            
+                        </div>  
+        
+                        <hr>
+        
+                        <h1 class="font-semibold mt-2">Service Info</h1>
+                        <div class="flex flex-col justify-center space-y-1 items-center">
+                            <p>Description: {{service_request.description}}</p>
+                        </div>
+                       
+        
+                    </div>    
+                    {% endif %}
+                        
+                    
+        
+                {% endfor %}
+                </div>
+               
+                    
+            </div>
+        </div>
+    
+        </div>
+            
+    </div>
+
+{% endblock %}

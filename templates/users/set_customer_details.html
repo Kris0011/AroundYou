@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+
+
+{% block content %}
+
+<div class='mt-20 flex flex-col justify-center items-center'>
+    
+    <h1>Settings</h1>
+    
+    <form action="" method="post" class="border md:p-10 p-4 m-4 rounded-md flex flex-col justify-between items-center bg-gray-100 text-md w-full">
+    
+        {% csrf_token %}
+    
+
+        <div class="mb-5 flex space-x-2">
+            <label class="form-control w-full " for="{{  customer_form.address.id_for_label }}">
+                <div class="label">
+                    <span class="label-text text-gray-900">Enter Your Address:</span>
+                </div>
+                {{ customer_form.address }}
+            </label>
+        </div>
+    
+        <button type="submit" class="bg-blue-700 rounded-md p-1 text-sm">
+            Save
+         </button>
+    </form>
+
+</div>
+    
+{% endblock content %}

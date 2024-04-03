@@ -1,0 +1,172 @@
+{% extends 'base.html' %} {% block content %}
+
+<div
+    class="glassy-effect m-10 mt-20 flex flex-col items-center justify-center rounded-2xl p-14 shadow-lg shadow-gray-900"
+>
+    <div class="flex items-center justify-center">
+        <img
+            src="{{user.img.url}}"
+            alt="{{user.username}}"
+            class="h-60 w-60 rounded-xl"
+        />
+
+        <div class="m-10 flex space-x-4">
+            <div class="flex flex-col space-y-3">
+                <h1 class="text-gray-400">Username :</h1>
+                <p class="text-gray-400">Email :</p>
+                <p class="text-gray-400">Full Name :</p>
+                <p class="text-gray-400">Mobile No. :</p>
+                <p class="text-gray-400">Date Joined :</p>
+                <p class="text-gray-400">Address :</p>
+            </div>
+            <div class="flex flex-col space-y-3">
+                <h1 class="text-gray-100">{{user.username}}</h1>
+                <p class="text-gray-100">{{user.email}}</p>
+                <p class="text-gray-100">
+                    {{user.first_name}} {{user.last_name}}
+                </p>
+                <p class="text-gray-100">{{user.phone}}</p>
+                <p class="text-gray-100">{{user.date_joined}}</p>
+                <p class="text-gray-100">{{customer.address}}</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="flex items-center justify-center space-x-4">
+        <a href="/" class="rounded-xl bg-gray-400 p-2 text-gray-900"
+            >Update Profile</a
+        >
+        <a href="/logout" class="rounded-xl bg-red-400 p-2 text-gray-900"
+            >Logout</a
+        >
+    </div>
+    
+    <div class="flex flex-col items-center justify-center space-x-4 mt-10">
+        <h1 class="text-2xl mb-4">Ongoing Services </h1>
+
+        <div>
+            {% for service_request in service_requests   %}
+            {% if service_request.request_status == 'accepted' %}
+            <div class="shadow-sm shadow-black p-4 bg-gray-300 text-black rounded-md my-8">  
+                <h1 class="font-semibold">Service Provider Info</h1>
+                <div class="flex justif-center items-center space-x-3 m-2">
+                    <img src="{{service_request.service_provider.user.img.url}}" alt="" class="h-14 w-14 rounded-full">
+                    <div>
+                        <p>Name: {{service_request.service_provider.user.first_name}} {{service_request.service_provider.user.last_name}} </p>
+                        <p>Phone: {{service_request.service_provider.user.phone}} </p>
+                        <p>Email: {{service_request.service_provider.user.email}} </p>
+                    </div>
+                    
+                </div>  
+
+                <hr>
+
+                <h1 class="font-semibold mt-2">Service Info</h1>
+                <div class="flex flex-col justify-center space-y-1 items-center">
+                    <p>Description: {{service_request.description}}</p>
+                    {% comment %} <p>Status : {{service_request.request_status}}</p> {% endcomment %}
+
+                    <a href="/service/complete_service/{{ service_request.req_id}}" class="p-1  m-1 underline text-blue-700">
+                        Click here to complete service
+                    </a>
+                    
+                    
+                </div>
+               
+
+            </div>    
+            {% endif %} 
+
+        {% endfor %}
+        </div>
+       
+            
+    </div>
+
+    <div class="flex flex-col items-center justify-center space-x-4 mt-10">
+        <h1 class="text-2xl mb-4">Services Pending </h1>
+
+        <div>
+            {% for service_request in service_requests   %}
+            {% if service_request.request_status == 'pending' %}
+            <div class="shadow-sm shadow-black p-4 bg-gray-300 text-black rounded-md my-8">  
+                <h1 class="font-semibold">Service Provider Info</h1>
+                <div class="flex justif-center items-center space-x-3 m-2">
+                    <img src="{{service_request.service_provider.user.img.url}}" alt="" class="h-14 w-14 rounded-full">
+                    <div>
+                        <p>Name: {{service_request.service_provider.user.first_name}} {{service_request.service_provider.user.last_name}} </p>
+                        <p>Phone: {{service_request.service_provider.user.phone}} </p>
+                        <p>Email: {{service_request.service_provider.user.email}} </p>
+                    </div>
+                    
+                </div>  
+
+                <hr>
+
+                <h1 class="font-semibold mt-2">Service Info</h1>
+                <div class="flex flex-col justify-center space-y-1 items-center">
+                    <p>Description: {{service_request.description}}</p>
+                    {% comment %} <p>Status : {{service_request.request_status}}</p> {% endcomment %}
+
+                    <p  class="p-1  m-1  text-blue-700">
+                        waiting for service provider to accept
+                    </p>
+                    
+                    
+                </div>
+               
+
+            </div>    
+            {% endif %} 
+
+        {% endfor %}
+        </div>
+       
+            
+    </div>
+
+
+    
+   
+        
+    <div class="flex flex-col items-center justify-center space-x-4 mt-10">
+        <h1 class="text-2xl mb-4">Services Completed </h1>
+
+        <div>
+            {% for service_request in service_requests   %}
+            
+            {% if service_request.request_status == 'completed' %}
+            <div class="shadow-sm shadow-black p-4 bg-gray-300 text-black rounded-md my-8">  
+                <h1 class="font-semibold">Service Provider Info</h1>
+                <div class="flex justif-center items-center space-x-3 m-2">
+                    <img src="{{service_request.service_provider.user.img.url}}" alt="" class="h-14 w-14 rounded-full">
+                    <div>
+                        <p>Name: {{service_request.service_provider.user.first_name}} {{service_request.service_provider.user.last_name}} </p>
+                        <p>Phone: {{service_request.service_provider.user.phone}} </p>
+                        <p>Email: {{service_request.service_provider.user.email}} </p>
+                    </div>
+                    
+                </div>  
+
+                <hr>
+
+                <h1 class="font-semibold mt-2">Service Info</h1>
+                <div class="flex flex-col justify-center space-y-1 items-center">
+                    <p>Description: {{service_request.description}}</p>
+                </div>
+               
+
+            </div>    
+            {% endif %}
+                
+            
+
+        {% endfor %}
+        </div>
+       
+            
+    </div>
+
+</div>
+
+{% endblock content %}

@@ -12,7 +12,7 @@ def index(request):
     if request.method == 'POST':
         filter_form = FilterServices(request.POST)
         if filter_form.is_valid:
-           # print(filter_form)
+            print(filter_form)    #i don't know why without this it was not working !!!!!
             service_type = filter_form.cleaned_data['service_type']
             service_location = filter_form.cleaned_data['service_location']
             if service_type == 'all' and service_location == 'all':
@@ -44,11 +44,11 @@ def index(request):
                 filter_form.fields['service_location'].initial = service_location
                 filter_form.fields['service_type'].initial = service_type
 
-            return render(request , 'services.html' , {'service_providers':service_providers , 'isLoggedin':request.user.is_authenticated , 'user':request.user , 'filter_form':filter_form})  
+            return render(request , 'service/services.html' , {'service_providers':service_providers , 'isLoggedin':request.user.is_authenticated , 'user':request.user , 'filter_form':filter_form})  
         
     filter_form = FilterServices()    
     service_providers = ServiceProvider.objects.all()
-    return render(request , 'services.html' , {'service_providers':service_providers , 'isLoggedin':request.user.is_authenticated , 'user':request.user , 'filter_form':filter_form})
+    return render(request , 'service/services.html' , {'service_providers':service_providers , 'isLoggedin':request.user.is_authenticated , 'user':request.user , 'filter_form':filter_form})
 
 
 def request_service(request , sp_id):
@@ -74,7 +74,7 @@ def request_service(request , sp_id):
             
 
         s_request_form = ServiceRequestForm()
-        return render(request , 'service_request.html' , {'s_request_form':s_request_form , 'isLoggedin':request.user.is_authenticated , 'user':request.user , 'sp_user' : sp_user})
+        return render(request , 'service/service_request.html' , {'s_request_form':s_request_form , 'isLoggedin':request.user.is_authenticated , 'user':request.user , 'sp_user' : sp_user})
     
     else:
         messages.error(request , "Please login to request service")
@@ -124,6 +124,6 @@ def my_services(request):
     if user.is_authenticated and user.role == 'service_provider':
         service_provider = ServiceProvider.objects.get(user = user)   
         service_requests = ServiceRequest.objects.filter( service_provider = service_provider)
-        return render(request , 'myservices.html' , {'service_requests':service_requests , 'isLoggedin':request.user.is_authenticated , 'user':request.user})
+        return render(request , 'service/myservices.html' , {'service_requests':service_requests , 'isLoggedin':request.user.is_authenticated , 'user':request.user})
     messages.error(request , "You are not logged in")
     return redirect('/login/')

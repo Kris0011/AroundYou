@@ -45,6 +45,17 @@
         {% endfor %}
     {% endif %}
 
+ 
+        <div class="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 loader">
+            {% load static %}
+            <img
+              src="{% static 'images/loading1.gif' %}"
+              class="lg:h-64  h-32  mx-auto"
+              alt="aroundyou"
+            />
+        </div>
+   
+
     <div class="sm:pl-56  px-4  mt-10 flex flex-col justify-between min-h-screen">
 
         <div class="flex flex-col justify-center items-center">
@@ -68,6 +79,25 @@
 
     {% comment %} all javascript links {% endcomment %}
     <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"></script>
+
+    <script>
+
+        window.addEventListener('load', () => {
+            
+            const loader = document.querySelector('.loader');
+            
+            loader.classList.add('hidden');
+
+            loader.addEventListener('transitionend', () => {
+                document.body.removeChild(loader);
+            })
+
+            
+
+
+        })
+
+    </script>
 
 
 

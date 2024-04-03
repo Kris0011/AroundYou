@@ -1,0 +1,127 @@
+{% extends 'base.html' %} {% block content%}
+
+<div class="p-4 m-10 flex flex-col justify-center items-center">
+  <h1 class="text-center font-semibold text-4xl mt-10 mb-4">Sign Up</h1>
+
+  <form class="border md:p-10 p-4 m-4 rounded-md flex flex-col justify-between items-center bg-gray-100 text-md w-full" method="POST">
+    {% csrf_token %} {{ register_form.non_field_errors }}
+    {{ register_form.errors }}
+    {% comment %} <div>
+        {% load static %}
+        <img
+            src="{% static 'images/boy.gif' %}"
+            class="lg:h-48 h-32 mx-auto"
+            alt="aroundyou"
+        />
+    </div> {% endcomment %}
+    <div class="flex md:flex-row flex-col justify-center items-center md:space-x-3">
+
+      <div class="w-[300px]">
+          <div class="mb-5 flex space-x-2">
+            <label class="form-control w-full " for="{{ register_form.username.id_for_label }}">
+                <div class="label">
+                    <span class="label-text text-gray-900">Username:</span>
+                </div>
+                {{ register_form.username }}
+            </label>
+        </div>
+        <div class="mb-5 flex space-x-2">
+            <label class="form-control w-full " for="{{ register_form.first_name.id_for_label }}">
+                <div class="label">
+                    <span class="label-text text-gray-900">First Name:</span>
+                </div>
+                {{ register_form.first_name }}
+            </label>
+        </div>
+        <div class="mb-5 flex space-x-2">
+            <label class="form-control w-full " for="{{ register_form.last_name.id_for_label }}">
+                <div class="label">
+                    <span class="label-text text-gray-900">Last Name:</span>
+                </div>
+                {{ register_form.last_name }}
+            </label>
+        </div>
+        <div class="mb-5 flex space-x-2">
+            <label class="form-control w-full " for="{{ register_form.email.id_for_label }}">
+                <div class="label">
+                    <span class="label-text text-gray-900">Email:</span>
+                </div>
+                {{ register_form.email }}
+            </label>
+        </div>
+        
+      </div>
+
+
+      <div class="w-[300px]">
+        <div class="mb-5 flex space-x-2">
+          <label class="form-control w-full " for="{{ register_form.password1.id_for_label }}">
+              <div class="label">
+                  <span class="label-text text-gray-900">Password:</span>
+              </div>
+              {{ register_form.password1 }}
+          </label>
+      </div>
+        <div class="mb-5 flex space-x-2">
+            <label class="form-control w-full " for="{{ register_form.password2.id_for_label }}">
+                <div class="label">
+                    <span class="label-text text-gray-900">Confirm Password:</span>
+                </div>
+                {{ register_form.password2 }}
+            </label>
+        </div>
+        <div class="mb-5 flex space-x-2">
+            <label class="form-control w-full " for="{{ register_form.phone.id_for_label }}">
+                <div class="label">
+                    <span class="label-text text-gray-900">Phone:</span>
+                </div>
+                {{ register_form.phone }}
+            </label>
+        </div>
+        
+        <div class="mb-5 flex space-x-2">
+            <label class="form-control w-full max-w-xs">
+              <div class="label">
+                <span class="label-text text-gray-900">Your Role: </span>
+              </div>
+              <select class="select select-bordered" name="{{ register_form.role.name }}" id="{{ register_form.role.id_for_label }}">
+                {% for value, label in register_form.role.field.choices %}
+                    <option value="{{ value }}" {% if value == register_form.role.value %}selected{% endif %}>
+                        {{ label }}
+                    </option>
+                {% endfor %}
+              </select>
+              
+            </label>
+        </div>
+
+        
+      </div>
+        
+        
+    </div>
+
+    <div class="mb-5 flex space-x-2">
+        <label class="form-control " for="{{ register_form.img.id_for_label }}">
+            <div class="label">
+                <span class="label-text text-gray-900">Your Image:</span>
+            </div>
+            {{ register_form.img }}
+        </label>
+    </div>
+    <button type="submit" class="bg-blue-700 mx-auto rounded-md p-2 text-sm">
+        Sign Up
+    </button>
+</form>
+
+
+
+  <p>
+    Already registered ?
+    <a href="/login" class="text-blue-400">Go to Login</a>
+  </p>
+</div>
+
+
+{% endblock %}
+

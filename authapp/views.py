@@ -33,7 +33,7 @@ def register_request(request):
     form = UserCreationForm()
     # print(customer_form)
     # print(serviceprovider_form)
-    return render(request , 'register.html' , context={'register_form': form })
+    return render(request , 'auth/register.html' , context={'register_form': form })
 
 def login_request(request):
     if request.method == "POST":
@@ -54,7 +54,7 @@ def login_request(request):
     
     form = UserLoginForm()
     # print(form)
-    return render(request , 'login.html' , context={'login_form': form })
+    return render(request , 'auth/login.html' , context={'login_form': form })
     
 def logout_request(request):
     logout(request)
@@ -65,7 +65,7 @@ def set_profile(request):
     user = request.user
     if user.is_authenticated:
         if user.role == 'service_provider':
-            return set_serviceprovider_details(request)
+            return users/set_serviceprovider_details(request)
         elif user.role == 'customer':
             return set_customer_details(request)
         else:
@@ -90,7 +90,7 @@ def set_customer_details(request):
             messages.error(request , "Unsuccessful registration. Invalid information")
     
     form = CustomerForm()
-    return render(request , 'set_customer_details.html' , context={'customer_form': form  , 'isLoggedin' : True , 'user' : request.user , 'role' : 'customer'})
+    return render(request , 'users/set_customer_details.html' , context={'customer_form': form  , 'isLoggedin' : True , 'user' : request.user , 'role' : 'customer'})
 
 def set_serviceprovider_details(request):
     if request.method == "POST":
@@ -105,7 +105,7 @@ def set_serviceprovider_details(request):
             messages.error(request , "Unsuccessful registration. Invalid information")
     
     form = ServiceProviderForm()
-    return render(request , 'set_serviceprovider_details.html' , context={'serviceprovider_form': form  , 'isLoggedin' : True , 'user' : request.user , 'role' : 'service_provider'})
+    return render(request , 'users/set_serviceprovider_details.html' , context={'serviceprovider_form': form  , 'isLoggedin' : True , 'user' : request.user , 'role' : 'service_provider'})
 
 def profile(request):
     user  = request.user
@@ -120,7 +120,7 @@ def profile(request):
         elif user.role == 'customer':
             customer = Customer.objects.get(user = user)
             services_requests  = ServiceRequest.objects.filter(customer = customer)
-            return render(request , 'customer_profile.html' , context = { 'user' : user , 'customer' : customer , 'isLoggedin' : True , 'service_requests' : services_requests})
+            return render(request , 'users/customer_profile.html' , context = { 'user' : user , 'customer' : customer , 'isLoggedin' : True , 'service_requests' : services_requests})
         else:
             messages.error(request , "Invalid role")
             return redirect('/' , context = { 'user' : user})
