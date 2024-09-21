@@ -10,6 +10,16 @@ Welcome to the AroundYou ! This platform aims to seamlessly connect users with s
 - **Cloudinary:** Cloud-based image and video management service. [Learn more](https://cloudinary.com/)
 - **Vercel:** Deployment platform for hosting and managing the live application. [Learn more](https://vercel.com/)
 
+## Preview
+
+<img src="./assets/1.png" alt="1" width="700"/>
+
+<img src="./assets/2.png" alt="2" width="700"/>
+
+<img src="./assets/3.png" alt="3" width="700"/>
+
+<img src="./assets/4.png" alt="4" width="700"/>
+
 ## Contributors
 - Kris Patel
 - Udit Mehta
