@@ -12,7 +12,7 @@ class UserCreationForm(UserCreationForm):
     password1 = forms.CharField(widget=forms.PasswordInput(attrs={'class': 'input input-bordered w-full max-w-xs', 'placeholder': 'Enter your password'}))
     password2 = forms.CharField(widget=forms.PasswordInput(attrs={'class': 'input input-bordered w-full max-w-xs', 'placeholder': 'Confirm your password'}))
     role = forms.ChoiceField(choices=role_choices, widget=forms.Select(attrs={'class': 'input input-bordered w-full max-w-xs'}))
-    img = forms.ImageField(widget=forms.FileInput(attrs={'class': 'file-input file-input-bordered max-w-xs', 'placeholder': 'Choose your profile picture'}))
+    # img = forms.ImageField(widget=forms.FileInput(attrs={'class': 'file-input file-input-bordered max-w-xs', 'placeholder': 'Choose your profile picture'}))
 
     class Meta:
         model = CustomUser
